@@ -19,6 +19,7 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -26,8 +27,13 @@
             android:name=".StudentDashboard"
             android:label="@string/title_activity_student_dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddQuestion"
-            android:parentActivityName=".StudentDashboard"></activity>
+        <activity
+            android:name=".AddQuestion"
+            android:parentActivityName=".StudentDashboard" />
+        <activity android:name=".MyQuestions" />
+        <activity android:name=".NearbyTutors" />
+        <activity android:name=".Messages" />
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>

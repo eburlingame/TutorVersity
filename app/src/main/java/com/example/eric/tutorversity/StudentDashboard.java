@@ -71,13 +71,19 @@ public class StudentDashboard extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_dashboard) {
-            // Handle the camera action
-        } else if (id == R.id.nav_new_request) {
+        if (id == R.id.nav_new_request) {
+            startActivity(new Intent(getBaseContext(), AddQuestion.class));
 
         } else if (id == R.id.nav_nearby_tutors) {
+            startActivity(new Intent(getBaseContext(), AddQuestion.class));
+
+        } else if (id == R.id.nav_messages) {
 
         } else if (id == R.id.nav_my_questions) {
+
+        } else if (id == R.id.nav_settings) {
+            startActivity(new Intent(getBaseContext(), Settings.class));
+        } else if (id == R.id.nav_logout) {
 
         }
 

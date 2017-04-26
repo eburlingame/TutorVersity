@@ -40,9 +40,19 @@
                 android:textSize="30sp" />
 
             <Button
+                android:id="@+id/btnViewQuestions"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="newQuestion"
+                android:text="My questions"
+                android:textAlignment="center" />
+
+            <Button
                 android:id="@+id/btnAskQuestion"
                 style="@style/Widget.AppCompat.Button"
-                android:layout_width="226dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="newQuestion"
                 android:text="Ask a question"
