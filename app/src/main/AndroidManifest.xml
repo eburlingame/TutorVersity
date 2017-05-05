@@ -33,7 +33,8 @@
         <activity android:name=".MyQuestions" />
         <activity android:name=".NearbyTutors" />
         <activity android:name=".Messages" />
-        <activity android:name=".Settings"></activity>
+        <activity android:name=".Settings"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

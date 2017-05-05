@@ -38,7 +38,7 @@ public class StudentDashboard extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -46,7 +46,7 @@ public class StudentDashboard extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -83,6 +83,7 @@ public class StudentDashboard extends AppCompatActivity
 
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(getBaseContext(), Settings.class));
+
         } else if (id == R.id.nav_logout) {
 
         }
