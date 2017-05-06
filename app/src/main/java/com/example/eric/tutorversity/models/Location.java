@@ -1,4 +1,4 @@
-package com.example.eric.tutorversity;
+package com.example.eric.tutorversity.models;
 
 /**
  * Created by amcinnis on 5/5/17.

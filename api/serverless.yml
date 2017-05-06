@@ -1,0 +1,81 @@
+service: tutorversity # NOTE: update this with your service name
+
+provider:
+  name: aws
+  stage: dev
+  region: us-east-1
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+    - dynamodb:Scan
+    - dynamodb:PutItem
+    - dynamodb:GetItem
+    - dynamodb:DeleteItem
+    - dynamodb:Query
+    - dynamodb:UpdateItem
+    Resource:
+    - "Fn::Join": ["", ["arn:aws:dynamodb:", {"Ref": "AWS::Region"}, ":", {"Ref": "AWS::AccountId"}, ":table/tutorv-users*"]]
+    - "Fn::Join": ["", ["arn:aws:dynamodb:", {"Ref": "AWS::Region"}, ":", {"Ref": "AWS::AccountId"}, ":table/tutorv-questions*"]]
+
+runtime: nodejs6.10
+
+functions:
+  getUsers:
+    handler: handler.getUsers
+    events:
+    - http:
+        path: user
+        method: get
+
+
+resources:
+  Resources:
+    UserTable: 
+      Type: "AWS::DynamoDB::Table"
+      Properties: 
+        AttributeDefinitions: 
+        - AttributeName: "id"
+          AttributeType: "S"
+        - AttributeName: "type"
+          AttributeType: "N"
+        - AttributeName: "email"
+          AttributeType: "S"
+        - AttributeName: "password_hash"
+          AttributeType: "S"
+        - AttributeName: "session_id"
+          AttributeType: "S"
+        - AttributeName: "bio"
+          AttributeType: "S"
+        - AttributeName: "subjects"
+          AttributeType: "S"
+        - AttributeName: "rating"
+          AttributeType: "N"
+        - AttributeName: "latitude"
+          AttributeType: "N"
+        - AttributeName: "longitude"
+          AttributeType: "N"
+        KeySchema: 
+        - AttributeName: "id"
+          KeyType: "HASH"
+        ProvisionedThroughput: 
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: "tutorv-users"
+    QuestionTable: 
+      Type: "AWS::DynamoDB::Table"
+      Properties: 
+        AttributeDefinitions: 
+        - AttributeName: "id"
+          AttributeType: "S"
+        - AttributeName: "user_id"
+          AttributeType: "S"
+        - AttributeName: "text"
+          AttributeType: "S"
+        - AttributeName: "subject"
+        KeySchema: 
+        - AttributeName: "id"
+          KeyType: "HASH"
+        ProvisionedThroughput: 
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: "tutorv-questions"

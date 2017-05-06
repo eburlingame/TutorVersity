@@ -1,13 +1,15 @@
-package com.example.eric.tutorversity;
+package com.example.eric.tutorversity.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class NearbyTutors extends AppCompatActivity {
+import com.example.eric.tutorversity.R;
+
+public class MyQuestions extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nearby_tutors);
+        setContentView(R.layout.activity_my_questions);
     }
 }

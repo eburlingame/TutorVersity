@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,16 +24,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StudentDashboard"
+            android:name=".activities.StudentDashboard"
             android:label="@string/title_activity_student_dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AddQuestion"
-            android:parentActivityName=".StudentDashboard" />
-        <activity android:name=".MyQuestions" />
-        <activity android:name=".NearbyTutors" />
-        <activity android:name=".Messages" />
-        <activity android:name=".Settings"
+            android:name=".models.AddQuestion"
+            android:parentActivityName=".activities.StudentDashboard" />
+        <activity android:name=".activities.MyQuestions" />
+        <activity android:name=".models.NearbyTutors" />
+        <activity android:name=".models.Messages" />
+        <activity android:name=".activities.Settings"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

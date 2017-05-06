@@ -1,36 +1,33 @@
-package com.example.eric.tutorversity;
+package com.example.eric.tutorversity.activities;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class StudentDashboard extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import com.example.eric.tutorversity.R;
+import com.example.eric.tutorversity.models.AddQuestion;
 
-    public void newQuestion(View view)
-    {
-        Intent intent = new Intent(getBaseContext(), AddQuestion.class);
-        startActivity(intent);
-    }
+public class Settings extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_dashboard);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_settings);
+
+        Toolbar toolbar1 = (Toolbar) findViewById(R.id.toolbar1);
+        setSupportActionBar(toolbar1);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar1, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -81,10 +78,10 @@ public class StudentDashboard extends AppCompatActivity
 
         } else if (id == R.id.nav_my_questions) {
 
-        } else if (id == R.id.nav_settings) {
-            startActivity(new Intent(getBaseContext(), Settings.class));
-
-        } else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_dashboard) {
+            startActivity(new Intent(getBaseContext(), StudentDashboard.class));
+        }
+        else if (id == R.id.nav_logout) {
 
         }
 

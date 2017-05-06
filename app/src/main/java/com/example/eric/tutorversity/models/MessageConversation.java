@@ -1,4 +1,4 @@
-package com.example.eric.tutorversity;
+package com.example.eric.tutorversity.models;
 
 import java.util.List;
 

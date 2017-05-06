@@ -1,4 +1,4 @@
-package com.example.eric.tutorversity;
+package com.example.eric.tutorversity.models;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
@@ -13,6 +13,8 @@ import android.view.View;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.util.Log;
+
+import com.example.eric.tutorversity.R;
 
 public class AddQuestion extends AppCompatActivity {
 
