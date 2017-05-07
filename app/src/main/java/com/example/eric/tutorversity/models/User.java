@@ -1,14 +1,20 @@
 package com.example.eric.tutorversity.models;
 
-/**
- * Created by amcinnis on 5/5/17.
- */
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import static com.example.eric.tutorversity.models.api.JSONConstants.*;
 
 public abstract class User {
 
-    String username;
-    String userID;
-    String userSecret;
+    String email;
+    String bio;
     Location currentLocation;
     boolean showMyLocation;
+
+    public User(JSONObject jsonObject) throws JSONException {
+        email = jsonObject.getString(EMAIL);
+        bio = jsonObject.getString(BIO);
+        currentLocation = null;
+    }
 }

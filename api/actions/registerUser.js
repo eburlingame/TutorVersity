@@ -1,45 +1,51 @@
 var moment = require('moment');
 var uuid = require('node-uuid');
 var AWS = require('aws-sdk');
+var bcrypt = require('bcrypt-nodejs');
+
 var db = new AWS.DynamoDB();
 
 const SALT_ROUNDS = 10;
 const USER_TABLE_NAME = "tutorv-users";
 
-exports.registerUser = function(event, cb) {
-  console.log("payload:", JSON.stringify(event));
+exports.registerUser = function(payload, cb) {
+  console.log(payload);
 
-  bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+  bcrypt.hash(payload.password, null, null, function(err, hash) {
     var params = {
       Item: {
         "email": {
-          S: event.parameters.email
+          S: payload.email
+        },
+        "type": {
+          N: String(payload.type)
+        },
+        "name": {
+          S: payload.name
+        },
+        "bio": {
+          S: payload.bio
+        },
+        "subjects": {
+          S: payload.subjects
         },
         "password_hash": {
           S: hash
         }
       },
-      TableName: 
+      TableName: USER_TABLE_NAME
     };
 
-    db.scan(params, function(err, data) {
+    db.putItem(params, function(err, data) {
       if (err) {
         cb(err);
-      } else {
+      }
+      else {
         console.log("data", data);
-        var res = {
-          "body": data.Items.map(mapUserItem)
-        };
-
-        if (data.LastEvaluatedKey !== undefined) {
-          res.headers = {
-            "next": data.LastEvaluatedKey.uid.S
-          };
-        }
-        cb(res);
+        cb({
+          "message": "User successfully added " + payload.email
+        });
       }
     });
   });
-
-
 };

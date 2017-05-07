@@ -1,33 +1,52 @@
 'use strict';
 
-const todo = require('./todo.js');
+const registerUser = require('./actions/registerUser.js');
+const auth = require('./actions/auth.js');
+const logout = require('./actions/logout.js');
 
-module.exports.getUsers = (event, context, cb) => todo.getUsers({
-  parameters: {
-    // limit: parseInt(event.queryStringParameters.limit),
-    // next: event.queryStringParameters.next
+function getPayload(event) {
+  if (typeof event.body === "object")
+  {
+    return event.body;
   }
-}, responseData => {
-	const response = {
-      statusCode: 200,
-      body: JSON.stringify(responseData.body)
-    };
+  else {
+    return JSON.parse(event.body);
+  }
+}
 
-    cb(null, response);
+function successResponse(data, cb) {
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify(data)
+  };
+
+  cb(null, response);
+}
+
+module.exports.registerUser = (event, context, cb) => registerUser.registerUser(
+  getPayload(event),
+  responseData => {
+    successResponse(responseData, cb);
+  });
+
+
+module.exports.auth = (event, context, cb) => auth.auth(getPayload(event), responseData => {
+  successResponse(responseData, cb);
+});
+
+module.exports.logout = (event, context, cb) => logout.logout(getPayload(event), responseData => {
+  successResponse(responseData, cb);
 });
 
 module.exports.test = (event, context, cb) => {
-	const response = {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
-        "Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS 
-      },
-      body: JSON.stringify({ 
-      	"message":"This is a test!", 
-	    "limit": event 
-      })
-    };
+  const response = {
+    statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      "Access-Control-Allow-Credentials": true // Required for cookies, authorization headers with HTTPS 
+    },
+    body: JSON.stringify(event)
+  };
 
-    cb(null, response);
+  cb(null, response);
 };

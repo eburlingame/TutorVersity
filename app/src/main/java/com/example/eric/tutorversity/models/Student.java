@@ -1,12 +1,15 @@
 package com.example.eric.tutorversity.models;
 
-import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-/**
- * Created by amcinnis on 5/5/17.
- */
+import java.util.List;
 
 public class Student extends User {
 
     List<Question> questions;
+
+    public Student(JSONObject jsonObject) throws JSONException {
+        super(jsonObject);
+    }
 }
