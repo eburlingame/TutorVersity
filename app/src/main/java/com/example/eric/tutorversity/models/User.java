@@ -7,14 +7,51 @@ import static com.example.eric.tutorversity.models.api.JSONConstants.*;
 
 public abstract class User {
 
-    String email;
-    String bio;
-    Location currentLocation;
-    boolean showMyLocation;
+    private String email;
+    private String bio;
+    private String name;
+    private Location currentLocation;
+    private boolean showMyLocation;
 
-    public User(JSONObject jsonObject) throws JSONException {
-        email = jsonObject.getString(EMAIL);
-        bio = jsonObject.getString(BIO);
-        currentLocation = null;
+    public User(JSONObject jsonObject) {
+        try
+        {
+            email = jsonObject.getString(EMAIL);
+            bio = jsonObject.getString(BIO);
+            name = jsonObject.getString(NAME);
+            currentLocation = null;
+        }
+        catch (JSONException e)
+        {
+            throw new RuntimeException("Could not parse JSON." + e.getMessage());
+        }
+    }
+
+    public JSONObject toJSON() {
+        try {
+            return new JSONObject()
+                    .put(EMAIL, email)
+                    .put(BIO, bio)
+                    .put(NAME, name)
+//                    .put(LOCATION, currentLocation.toJSON())
+                    .put(SHOW_MY_LOCATION, showMyLocation);
+        } catch (JSONException e) {
+            throw new RuntimeException("JSON could not be parsed for some reason");
+        }
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getBio()
+    {
+        return bio;
     }
 }

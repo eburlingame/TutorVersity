@@ -35,7 +35,6 @@ public class AuthResponse {
                 user = new Tutor(userData);
             }
         }
-        user = null;
     }
 
     public static AuthResponse failed()

@@ -2,6 +2,7 @@ package com.example.eric.tutorversity.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,9 +12,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.example.eric.tutorversity.OurSingleton;
 import com.example.eric.tutorversity.R;
 import com.example.eric.tutorversity.models.AddQuestion;
+import com.example.eric.tutorversity.models.Student;
+import com.example.eric.tutorversity.models.Tutor;
+import com.example.eric.tutorversity.models.api.request.AuthRequest;
+import com.example.eric.tutorversity.models.api.response.AuthResponse;
+
+import org.json.JSONObject;
+
+import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 public class StudentDashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,6 +43,9 @@ public class StudentDashboard extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        String json = getIntent().getExtras().getString(USER);
+        Student student = new Student(json);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -39,17 +54,15 @@ public class StudentDashboard extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
 
-    /*@Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }*/
+        View header = navigationView.getHeaderView(0);
+
+        TextView userNameView = (TextView) header.findViewById(R.id.username);
+        TextView userEmail = (TextView) header.findViewById(R.id.userEmail);
+
+        userNameView.setText(student.getName());
+        userEmail.setText(student.getEmail());
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,7 +101,8 @@ public class StudentDashboard extends AppCompatActivity
             startActivity(new Intent(getBaseContext(), Settings.class));
 
         } else if (id == R.id.nav_logout) {
-
+            Intent intent = new Intent(getBaseContext(), AddQuestion.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

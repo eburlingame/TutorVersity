@@ -34,6 +34,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.eric.tutorversity.OurSingleton;
 import com.example.eric.tutorversity.R;
+import com.example.eric.tutorversity.models.Student;
+import com.example.eric.tutorversity.models.Tutor;
 import com.example.eric.tutorversity.models.api.request.AuthRequest;
 import com.example.eric.tutorversity.models.api.response.AuthResponse;
 
@@ -41,6 +43,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 /**
  * A login screen that offers login via email/password.
@@ -262,13 +266,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return null;
         }
 
-        protected void onComplete(final boolean success) {
+        protected void onComplete(AuthResponse response) {
             mAuthTask = null;
             showProgress(false);
 
-            if (success) {
-                Intent intent = new Intent(getBaseContext(), StudentDashboard.class);
-                startActivity(intent);
+            if (response.getSuccess()) {
+                if (response.getUser() instanceof Student)
+                {
+                    Intent intent = new Intent(getBaseContext(), StudentDashboard.class);
+                    intent = intent.putExtra(USER, response.getUser().toJSON().toString());
+                    startActivity(intent);
+                }
+                else if (response.getUser() instanceof Tutor)
+                {
+                    // TODO: Start TutorDashboard
+//                    Intent intent = new Intent(getBaseContext(), TutorDashboard.class);
+//                    intent.putExtra(USER, response.getUser().toJSON().toString());
+//                    startActivity(intent);
+                }
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
@@ -278,7 +293,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         public void onResponse(AuthResponse response) {
             Log.d("I", Boolean.toString(response.getSuccess()));
-            onComplete(response.getSuccess());
+            onComplete(response);
         }
     }
 }

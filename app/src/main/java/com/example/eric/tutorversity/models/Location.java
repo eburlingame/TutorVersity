@@ -1,11 +1,13 @@
 package com.example.eric.tutorversity.models;
 
-/**
- * Created by amcinnis on 5/5/17.
- */
+import org.json.JSONObject;
 
 public class Location {
 
-    double latitude;
-    double longitude;
+    private double latitude;
+    private double longitude;
+
+    public JSONObject toJSON() {
+        return new JSONObject();
+    }
 }

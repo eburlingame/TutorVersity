@@ -15,6 +15,9 @@ public class JSONConstants {
     public static String USER_TYPE_STUDENT = "0";
     public static String USER_TYPE_TUTOR = "1";
 
-    public static String BIO = "type";
+    public static String BIO = "bio";
+    public static String NAME = "name";
+    public static String LOCATION = "location";
+    public static final String SHOW_MY_LOCATION = "show_my_location";
 
 }
