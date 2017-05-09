@@ -30,6 +30,8 @@ import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 public class StudentDashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private Student student;
+
     public void newQuestion(View view)
     {
         Intent intent = new Intent(getBaseContext(), AddQuestion.class);
@@ -44,7 +46,7 @@ public class StudentDashboard extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         String json = getIntent().getExtras().getString(USER);
-        Student student = new Student(json);
+        student = new Student(json);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -101,7 +103,8 @@ public class StudentDashboard extends AppCompatActivity
             startActivity(new Intent(getBaseContext(), Settings.class));
 
         } else if (id == R.id.nav_logout) {
-            Intent intent = new Intent(getBaseContext(), AddQuestion.class);
+            Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+            intent.putExtra(USER, student.toJSON().toString());
             startActivity(intent);
         }
 

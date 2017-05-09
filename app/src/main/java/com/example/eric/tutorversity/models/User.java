@@ -3,9 +3,10 @@ package com.example.eric.tutorversity.models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.example.eric.tutorversity.models.Util.fromJSON;
 import static com.example.eric.tutorversity.models.api.JSONConstants.*;
 
-public abstract class User {
+public class User {
 
     private String email;
     private String bio;
@@ -25,6 +26,11 @@ public abstract class User {
         {
             throw new RuntimeException("Could not parse JSON." + e.getMessage());
         }
+    }
+
+    public User(String json)
+    {
+        this(fromJSON(json));
     }
 
     public JSONObject toJSON() {

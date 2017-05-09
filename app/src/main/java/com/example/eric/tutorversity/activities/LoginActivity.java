@@ -11,7 +11,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -30,14 +29,15 @@ import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.eric.tutorversity.OurSingleton;
 import com.example.eric.tutorversity.R;
 import com.example.eric.tutorversity.models.Student;
 import com.example.eric.tutorversity.models.Tutor;
+import com.example.eric.tutorversity.models.User;
 import com.example.eric.tutorversity.models.api.request.AuthRequest;
+import com.example.eric.tutorversity.models.api.request.LogoutRequest;
 import com.example.eric.tutorversity.models.api.response.AuthResponse;
+import com.example.eric.tutorversity.models.api.response.LogoutResponse;
 
 import org.json.JSONObject;
 
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
+    private LoginTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -68,6 +68,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+
+        if (getIntent().getExtras() != null)
+        {
+            String userJSON = getIntent().getExtras().getString(USER);
+            User user = new User(userJSON);
+            LogoutTask logoutTask = new LogoutTask(user);
+            logoutTask.makeRequest();
+        }
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -140,7 +148,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
+            mAuthTask = new LoginTask(email, password);
             mAuthTask.makeRequest();
         }
     }
@@ -250,12 +258,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask implements Response.Listener<AuthResponse> {
+    public class LoginTask implements Response.Listener<AuthResponse> {
 
         private final String mEmail;
         private final String mPassword;
 
-        UserLoginTask(String email, String password) {
+        LoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
         }
@@ -276,6 +284,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     Intent intent = new Intent(getBaseContext(), StudentDashboard.class);
                     intent = intent.putExtra(USER, response.getUser().toJSON().toString());
                     startActivity(intent);
+                    finish();
                 }
                 else if (response.getUser() instanceof Tutor)
                 {
@@ -292,6 +301,42 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         public void onResponse(AuthResponse response) {
+            Log.d("I", Boolean.toString(response.getSuccess()));
+            onComplete(response);
+        }
+    }
+
+    /**
+     * Represents an asynchronous login/registration task used to authenticate
+     * the user.
+     */
+    public class LogoutTask implements Response.Listener<LogoutResponse> {
+
+        private User user;
+        LogoutTask(User user) {
+            this.user = user;
+        }
+
+        protected void makeRequest() {
+            LogoutRequest logoutRequest = new LogoutRequest(user);
+            Request<JSONObject> request = logoutRequest.makeRequest(this);
+            OurSingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+        }
+
+        protected void onComplete(LogoutResponse response) {
+            mAuthTask = null;
+            showProgress(false);
+
+            if (response.getSuccess()) {
+                findViewById(R.id.loginMessage).setVisibility(View.VISIBLE);
+            } else {
+                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.requestFocus();
+            }
+        }
+
+        @Override
+        public void onResponse(LogoutResponse response) {
             Log.d("I", Boolean.toString(response.getSuccess()));
             onComplete(response);
         }

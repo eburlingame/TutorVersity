@@ -19,6 +19,13 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/loginMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/logout_message"
+        android:visibility="gone" />
+
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
