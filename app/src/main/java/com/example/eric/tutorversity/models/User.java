@@ -1,5 +1,7 @@
 package com.example.eric.tutorversity.models;
 
+import android.os.Parcelable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
