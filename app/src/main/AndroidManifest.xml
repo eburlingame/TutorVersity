@@ -7,6 +7,13 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,6 +26,7 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -29,11 +37,15 @@
         <activity
             android:name=".models.AddQuestion"
             android:parentActivityName=".activities.StudentDashboard" />
-        <activity android:name=".activities.MyQuestions" />
+        <activity
+            android:name=".activities.MyQuestions"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".models.NearbyTutors" />
         <activity android:name=".models.Messages" />
-        <activity android:name=".activities.Settings"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activities.Settings"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

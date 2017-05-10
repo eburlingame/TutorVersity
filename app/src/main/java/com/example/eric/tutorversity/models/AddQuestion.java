@@ -22,9 +22,9 @@ public class AddQuestion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_question);
-        Log.i("TEST", "------------------------------");
     }
 
+    //need to figure out how to go back to previous activity properly
     public boolean onOptionsItemSelected(MenuItem item){
         finish();
         return super.onOptionsItemSelected(item);
