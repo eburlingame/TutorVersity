@@ -35,7 +35,7 @@
             android:label="@string/title_activity_student_dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".models.AddQuestion"
+            android:name=".activities.AddQuestion"
             android:parentActivityName=".activities.StudentDashboard" />
         <activity
             android:name=".activities.MyQuestions"

@@ -2,7 +2,6 @@ package com.example.eric.tutorversity.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,16 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.android.volley.Response;
-import com.example.eric.tutorversity.OurSingleton;
 import com.example.eric.tutorversity.R;
-import com.example.eric.tutorversity.models.AddQuestion;
 import com.example.eric.tutorversity.models.Student;
-import com.example.eric.tutorversity.models.Tutor;
-import com.example.eric.tutorversity.models.api.request.AuthRequest;
-import com.example.eric.tutorversity.models.api.response.AuthResponse;
-
-import org.json.JSONObject;
 
 import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
@@ -94,7 +85,13 @@ public class StudentSidebar extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_new_request)
+        if (id == R.id.nav_dashboard)
+        {
+            Intent intent = new Intent(getBaseContext(), StudentDashboard.class);
+            intent.putExtra(USER, student.toJSON().toString());
+            startActivity(intent);
+        }
+        else if (id == R.id.nav_new_request)
         {
             Intent intent = new Intent(getBaseContext(), AddQuestion.class);
             intent.putExtra(USER, student.toJSON().toString());

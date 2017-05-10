@@ -35,4 +35,9 @@
         <item>Chemistry</item>
         <item>English</item>
     </string-array>
+
+    <string-array name="sample_questions">
+        <item>Questions #1</item>
+        <item>Questions #2</item>
+    </string-array>
 </resources>
