@@ -34,8 +34,8 @@ public class AddQuestion extends AppCompatActivity {
 
     //need to figure out how to go back to previous activity properly
     public boolean onOptionsItemSelected(MenuItem item) {
-        finish();
-        return super.onOptionsItemSelected(item);
+        onBackPressed();
+        return true;
     }
 
 }
