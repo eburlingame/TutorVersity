@@ -2,8 +2,8 @@ package com.example.eric.tutorversity.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.view.View;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.example.eric.tutorversity.R;
 import com.example.eric.tutorversity.models.Student;
@@ -14,7 +14,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
-public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
+public class TutorSidebarMenu implements Drawer.OnDrawerItemClickListener
 {
     private Drawer drawer;
     private Student student;
@@ -22,20 +22,18 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
 
     private PrimaryDrawerItem dashboardItem = new PrimaryDrawerItem().withIdentifier(1).withName("Dashboard")
             .withIcon(R.drawable.ic_apps_black_24dp);
-    private PrimaryDrawerItem newRequestItem = new PrimaryDrawerItem().withIdentifier(2).withName("New Request")
-            .withIcon(R.drawable.ic_add_black_24dp);
-    private PrimaryDrawerItem myQuestionsItem = new PrimaryDrawerItem().withIdentifier(3).withName("My Questions")
-            .withIcon(R.drawable.ic_dehaze_black_24dp);
-    private PrimaryDrawerItem nearbyTutorsItem = new PrimaryDrawerItem().withIdentifier(4).withName("Nearby tutors")
+    private PrimaryDrawerItem nearbyTutorsItem = new PrimaryDrawerItem().withIdentifier(4).withName("Nearby questions")
             .withIcon(R.drawable.ic_place_black_24dp);
     private PrimaryDrawerItem messagesItem = new PrimaryDrawerItem().withIdentifier(5).withName("Messages")
             .withIcon(R.drawable.ic_forum_black_24dp);
+    private PrimaryDrawerItem myProfileItem = new PrimaryDrawerItem().withIdentifier(6).withName("My Profile")
+            .withIcon(R.drawable.ic_person_black_24dp);
     private PrimaryDrawerItem settingsItem = new PrimaryDrawerItem().withIdentifier(6).withName("Settings")
             .withIcon(R.drawable.ic_more_vert_black_24dp);
     private PrimaryDrawerItem logoutItem = new PrimaryDrawerItem().withIdentifier(7).withName("Logout")
             .withIcon(R.drawable.ic_clear_black_24dp);
 
-    public StudentSidebarMenu(final Activity activity, Toolbar toolbar, Student student)
+    public TutorSidebarMenu(final Activity activity, Toolbar toolbar, Student student)
     {
         this.student = student;
         this.activity = activity;
@@ -45,10 +43,9 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
                 .withToolbar(toolbar)
                 .addDrawerItems(
                         dashboardItem,
-                        newRequestItem,
-                        myQuestionsItem,
                         nearbyTutorsItem,
                         messagesItem,
+                        myProfileItem,
                         settingsItem,
                         logoutItem
                 )
@@ -63,13 +60,7 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
         {
 
         }
-        else if (drawerItem.equals(newRequestItem))
-        {
-            Intent intent = new Intent(activity.getBaseContext(), AddQuestion.class);
-            intent.putExtra(USER, student.toJSON().toString());
-            activity.startActivity(intent);
-        }
-        else if (drawerItem.equals(myQuestionsItem))
+        else if (drawerItem.equals(myProfileItem))
         {
 
         }

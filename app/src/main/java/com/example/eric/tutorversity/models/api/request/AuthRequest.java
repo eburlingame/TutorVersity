@@ -49,7 +49,6 @@ public class AuthRequest implements Response.Listener<JSONObject>, Response.Erro
                 this);
     }
 
-
     @Override
     public void onResponse(JSONObject response) {
 
