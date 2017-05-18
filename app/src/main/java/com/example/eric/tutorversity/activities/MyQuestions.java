@@ -28,7 +28,7 @@ public class MyQuestions extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_questions);
 
-        Toolbar toolbar2 = (Toolbar) findViewById(R.id.toolbar1);
+        Toolbar toolbar2 = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar2);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

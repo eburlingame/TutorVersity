@@ -67,7 +67,9 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
 
         if (drawerItem.equals(dashboardItem))
         {
-
+            Intent intent = new Intent(activity.getBaseContext(), StudentDashboard.class);
+            intent.putExtra(USER, student.toJSON().toString());
+            activity.startActivity(intent);
         }
         else if (drawerItem.equals(newRequestItem))
         {
@@ -89,7 +91,9 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
         }
         else if (drawerItem.equals(settingsItem))
         {
-
+            Intent intent = new Intent(activity.getBaseContext(), Settings.class);
+            intent.putExtra(USER, student.toJSON().toString());
+            activity.startActivity(intent);
         }
         else if (drawerItem.equals(logoutItem))
         {
