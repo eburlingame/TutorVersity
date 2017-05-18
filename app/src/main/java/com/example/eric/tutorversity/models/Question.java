@@ -6,7 +6,9 @@ package com.example.eric.tutorversity.models;
 
 public class Question {
 
-    User asker;
-    String question;
-    String subject;
+    public User asker;
+    public String title;
+    public String question;
+    public String subject;
+    public String time;
 }

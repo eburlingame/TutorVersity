@@ -10,4 +10,17 @@ public class Location {
     public JSONObject toJSON() {
         return new JSONObject();
     }
+
+    public Location(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return this.latitude;
+    }
+
+    public double getLongitude() {
+        return this.longitude;
+    }
 }
