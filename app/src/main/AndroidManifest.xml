@@ -39,7 +39,7 @@
             android:parentActivityName=".activities.StudentDashboard" />
         <activity
             android:name=".activities.MyQuestions"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".models.NearbyTutors" />
         <activity android:name=".models.Messages" />
         <activity
