@@ -35,13 +35,23 @@ public class User {
         this(fromJSON(json));
     }
 
+    public User(String name, String email) {
+        try {
+            this.email = email;
+            this.name = name;
+        }
+        catch (Exception e) {
+            throw new RuntimeException("Could not create User." + e.getMessage());
+        }
+    }
+
     public JSONObject toJSON() {
         try {
             return new JSONObject()
                     .put(EMAIL, email)
                     .put(BIO, bio)
                     .put(NAME, name)
-//                    .put(LOCATION, currentLocation.toJSON())
+//                    .put(LOCATION, currentLocation’.toJSON())
                     .put(SHOW_MY_LOCATION, showMyLocation);
         } catch (JSONException e) {
             throw new RuntimeException("JSON could not be parsed for some reason");

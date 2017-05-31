@@ -34,6 +34,10 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
             .withIcon(R.drawable.ic_more_vert_black_24dp);
     private PrimaryDrawerItem logoutItem = new PrimaryDrawerItem().withIdentifier(7).withName("Logout")
             .withIcon(R.drawable.ic_clear_black_24dp);
+    private PrimaryDrawerItem viewQuestionItem = new PrimaryDrawerItem().withIdentifier(8).withName("View Question")
+            .withIcon(R.drawable.ic_menu_send);
+    private PrimaryDrawerItem viewTutorItem = new PrimaryDrawerItem().withIdentifier(9).withName("View Tutor")
+            .withIcon(R.drawable.ic_person_black_24dp);
 
     public StudentSidebarMenu(final Activity activity, Toolbar toolbar, Student student)
     {
@@ -50,7 +54,9 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
                         nearbyTutorsItem,
                         messagesItem,
                         settingsItem,
-                        logoutItem
+                        logoutItem,
+                        viewQuestionItem,
+                        viewTutorItem
                 )
                 .withOnDrawerItemClickListener(this)
                 .build();
@@ -61,7 +67,9 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
 
         if (drawerItem.equals(dashboardItem))
         {
-
+            Intent intent = new Intent(activity.getBaseContext(), StudentDashboard.class);
+            intent.putExtra(USER, student.toJSON().toString());
+            activity.startActivity(intent);
         }
         else if (drawerItem.equals(newRequestItem))
         {
@@ -71,7 +79,9 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
         }
         else if (drawerItem.equals(myQuestionsItem))
         {
-
+            Intent intent = new Intent(activity.getBaseContext(), MyQuestions.class);
+            intent.putExtra(USER, student.toJSON().toString());
+            activity.startActivity(intent);
         }
         else if (drawerItem.equals(nearbyTutorsItem))
         {
@@ -83,9 +93,20 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
         }
         else if (drawerItem.equals(settingsItem))
         {
-
+            Intent intent = new Intent(activity.getBaseContext(), Settings.class);
+            intent.putExtra(USER, student.toJSON().toString());
+            activity.startActivity(intent);
         }
         else if (drawerItem.equals(logoutItem))
+        {
+
+        }
+        else if (drawerItem.equals(viewQuestionItem))
+        {
+            Intent intent = new Intent(activity.getBaseContext(), ViewQuestion.class);
+            activity.startActivity(intent);
+        }
+        else if (drawerItem.equals(viewQuestionItem))
         {
 
         }
