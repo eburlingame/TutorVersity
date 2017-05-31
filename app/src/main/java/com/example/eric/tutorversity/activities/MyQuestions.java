@@ -49,21 +49,18 @@ public class MyQuestions extends AppCompatActivity {
         String q = "How to I integrate 1/x?";
         String time = "7:35 PM";
         String subject = "Calculus";
-        Question question = new Question("Garrett", title, q, time, subject);
-        Question question1 = new Question("Garrett", title, q, time, subject);
-        Question question2 = new Question("Garrett", title, q, time, subject);
-        Question question3 = new Question("Garrett", "hello", "jell", time, subject);
-        Question question4 = new Question("Garrett", "testing", "no", time, subject);
-        Question question5 = new Question("Garrett", "working", "yes", time, subject);
-        Question question6 = new Question("Garrett", "nwe one", "eh", time, subject);
+        Question question = new Question("Joe Smith", "Stuck on factorials", "How do I compute 12! by hand?", "Math", time);
+        Question question1 = new Question("Kim Davis", "Try-Catch Blocks", "What is the proper usage of try-catch block for input?", "Computer Engineering", time);
+        Question question2 = new Question("Bob Miller", "Time complexity", "How do I compute the time complexity of a for loop?", "Computer Engineering", time);
+        Question question5 = new Question("Taylor Williams", "Atomic numbers", "On the periodic table, which number is the atomic number?", "Chemistry", time);
+        Question question3 = new Question("Taylor Williams", "Atomic numbers", "On the periodic table, which number is the atomic number?", "Chemistry", time);
+        Question question4 = new Question("Taylor Williams", "Atomic numbers", "On the periodic table, which number is the atomic number?ajsdkfjlkasdjfaklsdjflkasjdlfjalkdfjlkasljdflkasdjflaklsjdflk", "Biology", time);
         list.add(question);
         list.add(question1);
         list.add(question2);
         list.add(question3);
         list.add(question4);
         list.add(question5);
-        list.add(question6);
-        list.add(question1);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -97,7 +94,7 @@ public class MyQuestions extends AppCompatActivity {
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-            if(convertView == null) {
+            if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.question_item, parent, false);
             }
 
@@ -107,14 +104,44 @@ public class MyQuestions extends AppCompatActivity {
             TextView question = (TextView) convertView.findViewById(R.id.desc);
             TextView heading = (TextView) convertView.findViewById(R.id.heading);
 
-            heading.setText(currentItem.asker);
+            heading.setText(currentItem.title);
             question.setText(currentItem.question);
-            //newsImage.setImageResource(currentItem.getImageID());
+            newsImage.setImageResource(getImage(currentItem.subject));
 
 
             return convertView;
-
         }
-    }
 
+        private int getImage(String subject) {
+            if(subject.equals("Chemistry")) {
+                return R.mipmap.ic_chem;
+            }
+            else if(subject.equalsIgnoreCase("Physics")) {
+                return R.mipmap.ic_phys;
+            }
+            else if(subject.equalsIgnoreCase("English")) {
+                return R.mipmap.ic_engl;
+            }
+            else if(subject.equalsIgnoreCase("Biology")) {
+                return R.mipmap.ic_bio;
+            }
+            else if(subject.equalsIgnoreCase("Math")) {
+                return R.mipmap.ic_math;
+            }
+            else if(subject.equalsIgnoreCase("Mechanical Engineering")) {
+                return R.mipmap.ic_me;
+            }
+            else if(subject.equalsIgnoreCase("Computer Engineering")) {
+                return R.mipmap.ic_cpe;
+            }
+            else {
+                return R.mipmap.ic_launcher_round;
+            }
+        }
+
+    }
 }
+
+
+
+
