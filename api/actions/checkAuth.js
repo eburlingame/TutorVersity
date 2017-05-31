@@ -39,8 +39,6 @@ exports.auth = function(payload, cb) {
     FilterExpression: "#T = :v2"
   };
 
-  console.log(params);
-
   db.query(params, function(err, userData) {
 
       if (err) {

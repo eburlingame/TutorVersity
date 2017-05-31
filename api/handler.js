@@ -41,6 +41,11 @@ module.exports.newQuestion = (event, context, cb) => newQuestion.newQuestion(get
   successResponse(responseData, cb);
 });
 
+module.exports.getQuestions = (event, context, cb) => getQuestions.getQuestions(getPayload(event), 
+  responseData => {
+  successResponse(responseData, cb);
+});
+
 module.exports.logout = (event, context, cb) => logout.logout(getPayload(event), responseData => {
   successResponse(responseData, cb);
 });
