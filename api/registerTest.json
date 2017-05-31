@@ -1,0 +1,10 @@
+{
+	"body": {
+		"email": "test",
+		"password": "test",
+		"type": "0",
+		"name": "S Student",
+		"bio": "Hi my name is student",
+		"subjects": "Math, Computer Science"
+	}
+}

@@ -34,7 +34,15 @@ functions:
     - http:
         path: auth
         method: post
+        cors: true  
+  newQuestion:
+    handler: handler.newQuestion
+    events:
+    - http:
+        path: newQuestion
+        method: post
         cors: true
+
   logout:
     handler: handler.logout
     events:
