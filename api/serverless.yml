@@ -49,6 +49,13 @@ functions:
         path: getQuestions
         method: post
         cors: true
+  getUserQuestions:
+    handler: handler.getUserQuestions
+    events:
+    - http:
+        path: getUserQuestions
+        method: post
+        cors: true
   logout:
     handler: handler.logout
     events:

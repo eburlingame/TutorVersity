@@ -20,7 +20,7 @@ function mapQuestionsList(data)
   })
 }
 
-exports.getQuestions = function(payload, cb) {
+exports.getUserQuestions = function(payload, cb) {
   console.log(payload);
 
   auther.auth(payload, function(userResult) {
@@ -28,26 +28,14 @@ exports.getQuestions = function(payload, cb) {
     if (userResult.success) {
       var user = userResult.user;
 
-      var subjects = user.subjects.split(/\s?,\s?/);
-
-      var i = 0; 
-      var subjectQuery = subjects
-        .map(function(item){ return "#sub = :val" + (i++) })
-        .join(" or ");
-
-      var expressionValues = {};
-      for (var i = 0; i < subjects.length; i++)
-      {
-        expressionValues[":val" + i] = { S: subjects[i] };
-      }
-      console.log(subjectQuery);
-
       var params = {
         ExpressionAttributeNames: {
-          "#sub": "subject"
+          "#e": "email"
         }, 
-        ExpressionAttributeValues: expressionValues,
-        FilterExpression: subjectQuery, 
+        ExpressionAttributeValues: {
+          ":e": {S: user.email}
+        },
+        FilterExpression: "#e = :e", 
         TableName: QUESTIONS_TABLE_NAME
       };
 

@@ -15,7 +15,8 @@ function mapToUser(userData)
     "name": user.name.S,
     "type": user.type.N,
     "bio": user.bio.S,
-    "subjects": user.subjects.S
+    "subjects": user.subjects.S,
+    "token": user.token.S
   }
 }
 
@@ -81,9 +82,9 @@ exports.auth = function(payload, cb) {
                   cb(err);
                 }
                 else {
+                  user.token = loggedInToken;
                   cb({
                     "status": "success", 
-                    "token": loggedInToken,
                     "user": user 
                   });
                 }

@@ -3,15 +3,9 @@ package com.example.eric.tutorversity.activities;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,13 +13,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.app.Activity;
 
+import com.android.volley.Response;
+import com.example.eric.tutorversity.OurSingleton;
 import com.example.eric.tutorversity.R;
 import com.example.eric.tutorversity.models.Question;
 import com.example.eric.tutorversity.models.Student;
 import com.example.eric.tutorversity.models.User;
+import com.example.eric.tutorversity.models.api.request.GetUserQuestionsRequest;
+import com.example.eric.tutorversity.models.api.response.GetUserQuestionsResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +30,22 @@ import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 public class MyQuestions extends AppCompatActivity {
     private Student student;
-    private List<Question> list = new ArrayList<>();
-    private Activity activity;
+    private List<Question> questions = new ArrayList<>();
+
+    private class DataHandler implements Response.Listener<GetUserQuestionsResponse>
+    {
+        DataHandler(User user)
+        {
+            GetUserQuestionsRequest request = new GetUserQuestionsRequest(user);
+            OurSingleton.getInstance(getApplicationContext()).addToRequestQueue(request.makeRequest(this));
+        }
+
+        @Override
+        public void onResponse(GetUserQuestionsResponse response)
+        {
+            questions = response.getQuestions();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,28 +54,10 @@ public class MyQuestions extends AppCompatActivity {
 
         String json = getIntent().getExtras().getString(USER);
         student = new Student(json);
-
-        String title = "Integration Help";
-        String q = "How to I integrate 1/x?";
-        String time = "7:35 PM";
-        String subject = "Calculus";
-        Question question = new Question("Joe Smith", "Stuck on factorials", "How do I compute 12! by hand?", "Math", time);
-        Question question1 = new Question("Kim Davis", "Try-Catch Blocks", "What is the proper usage of try-catch block for input?", "Computer Engineering", time);
-        Question question2 = new Question("Bob Miller", "Time complexity", "How do I compute the time complexity of a for loop?", "Computer Engineering", time);
-        Question question5 = new Question("Taylor Williams", "Atomic numbers", "On the periodic table, which number is the atomic number?", "Chemistry", time);
-        Question question3 = new Question("Taylor Williams", "Atomic numbers", "On the periodic table, which number is the atomic number?", "Chemistry", time);
-        Question question4 = new Question("Taylor Williams", "Atomic numbers", "On the periodic table, which number is the atomic number?ajsdkfjlkasdjfaklsdjflkasjdlfjalkdfjlkasljdflkasdjflaklsjdflk", "Biology", time);
-        list.add(question);
-        list.add(question1);
-        list.add(question2);
-        list.add(question3);
-        list.add(question4);
-        list.add(question5);
-
+        DataHandler handler = new DataHandler(student);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         StudentSidebarMenu menu = new StudentSidebarMenu(this, toolbar, student);
-
 
         ArrayAdapter<Question> adapter = new customAdapter();
 
@@ -75,7 +67,7 @@ public class MyQuestions extends AppCompatActivity {
         newsItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Question currentItem = list.get(position);
+                Question currentItem = questions.get(position);
                 Intent intent = new Intent(MyQuestions.this, ViewQuestion.class);
                 intent.putExtra("QUESTION_ID", currentItem);
                 startActivity(intent);
@@ -87,7 +79,7 @@ public class MyQuestions extends AppCompatActivity {
 
     private class customAdapter extends ArrayAdapter<Question> {
         public customAdapter() {
-            super(MyQuestions.this, R.layout.activity_my_questions_list, list);
+            super(MyQuestions.this, R.layout.activity_my_questions_list, questions);
         }
 
         @NonNull
@@ -98,7 +90,7 @@ public class MyQuestions extends AppCompatActivity {
                 convertView = getLayoutInflater().inflate(R.layout.question_item, parent, false);
             }
 
-            Question currentItem = list.get(position);
+            Question currentItem = questions.get(position);
 
             ImageView newsImage = (ImageView) convertView.findViewById(R.id.leftIco);
             TextView question = (TextView) convertView.findViewById(R.id.desc);

@@ -13,6 +13,7 @@ public class User {
     private String email;
     private String bio;
     private String name;
+    private String token;
     private Location currentLocation;
     private boolean showMyLocation;
 
@@ -22,6 +23,7 @@ public class User {
             email = jsonObject.getString(EMAIL);
             bio = jsonObject.getString(BIO);
             name = jsonObject.getString(NAME);
+            token = jsonObject.getString(TOKEN);
             currentLocation = null;
         }
         catch (JSONException e)
@@ -51,12 +53,15 @@ public class User {
                     .put(EMAIL, email)
                     .put(BIO, bio)
                     .put(NAME, name)
+                    .put(TOKEN, token)
 //                    .put(LOCATION, currentLocation’.toJSON())
                     .put(SHOW_MY_LOCATION, showMyLocation);
         } catch (JSONException e) {
             throw new RuntimeException("JSON could not be parsed for some reason");
         }
     }
+
+    public String getToken() { return token; }
 
     public String getEmail()
     {

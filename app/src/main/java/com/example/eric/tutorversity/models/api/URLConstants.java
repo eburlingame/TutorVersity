@@ -6,6 +6,8 @@ public class URLConstants {
     public static String REGISTER_USER_URL = URL_BASE + "resgisteruser";
     public static String AUTH_URL = URL_BASE + "auth";
     public static String LOGOUT_URL = URL_BASE + "logout";
+    public static String GET_QUESTIONS_URL = URL_BASE + "getQuestions";
+    public static String GET_USER_QUESTIONS_URL = URL_BASE + "getUserQuestions";
     public static String TEST = URL_BASE + "test";
 
 }
