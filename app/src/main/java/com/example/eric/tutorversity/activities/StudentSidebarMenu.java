@@ -106,9 +106,10 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
             Intent intent = new Intent(activity.getBaseContext(), ViewQuestion.class);
             activity.startActivity(intent);
         }
-        else if (drawerItem.equals(viewQuestionItem))
+        else if (drawerItem.equals(viewTutorItem))
         {
-
+            Intent intent = new Intent(activity.getBaseContext(), ViewTutor.class);
+            activity.startActivity(intent);
         }
         return true;
     }
