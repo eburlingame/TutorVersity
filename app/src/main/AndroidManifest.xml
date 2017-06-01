@@ -39,14 +39,16 @@
             android:parentActivityName=".activities.StudentDashboard" />
         <activity
             android:name=".activities.MyQuestions"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".models.NearbyTutors" />
         <activity android:name=".models.Messages" />
         <activity
             android:name=".activities.Settings"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.ViewQuestion" />
-        <activity android:name=".activities.ViewTutor"></activity>
+        <activity android:name=".activities.ViewTutor" />
+        <activity android:name=".activities.SignUpActivity" />
+        <activity android:name=".activities.TutorDashboard"></activity>
     </application>
 
 </manifest>
