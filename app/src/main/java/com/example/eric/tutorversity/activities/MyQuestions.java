@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.example.eric.tutorversity.OurSingleton;
@@ -31,6 +34,8 @@ import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 public class MyQuestions extends AppCompatActivity {
     private Student student;
     private List<Question> questions = new ArrayList<>();
+    private ArrayAdapter<Question> adapter;
+    private ListView newsItems;
 
     private class DataHandler implements Response.Listener<GetUserQuestionsResponse>
     {
@@ -44,6 +49,12 @@ public class MyQuestions extends AppCompatActivity {
         public void onResponse(GetUserQuestionsResponse response)
         {
             questions = response.getQuestions();
+            adapter.addAll(questions);
+            if(questions == null || questions.size() == 0) {
+                Toast toast = Toast.makeText(MyQuestions.this, "No Question\n To Display", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
         }
     }
 
@@ -59,9 +70,10 @@ public class MyQuestions extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         StudentSidebarMenu menu = new StudentSidebarMenu(this, toolbar, student);
 
-        ArrayAdapter<Question> adapter = new customAdapter();
+        adapter = new customAdapter();
 
-        ListView newsItems = (ListView) (findViewById(R.id.newsItems));
+        newsItems = (ListView) (findViewById(R.id.newsItems));
+
         newsItems.setAdapter(adapter);
 
         newsItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -73,7 +85,6 @@ public class MyQuestions extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
 
@@ -133,7 +144,3 @@ public class MyQuestions extends AppCompatActivity {
 
     }
 }
-
-
-
-
