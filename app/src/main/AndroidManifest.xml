@@ -48,6 +48,9 @@
         <activity android:name=".activities.ViewQuestion" />
         <activity android:name=".activities.ViewTutor" />
         <activity android:name=".activities.SignUpActivity" />
+        <activity
+            android:name=".activities.TutorMyQuestions"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.TutorDashboard"></activity>
     </application>
 
