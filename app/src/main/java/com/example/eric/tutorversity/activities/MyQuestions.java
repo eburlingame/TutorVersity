@@ -80,7 +80,7 @@ public class MyQuestions extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Question currentItem = questions.get(position);
-                Intent intent = new Intent(MyQuestions.this, ViewQuestion.class);
+                Intent intent = new Intent(MyQuestions.this, ViewPostedQuestion.class);
                 intent.putExtra("QUESTION_ID", currentItem);
                 startActivity(intent);
             }
