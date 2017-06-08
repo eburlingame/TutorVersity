@@ -77,7 +77,7 @@ public class TutorMyQuestions extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         TutorSidebarMenu menu = new TutorSidebarMenu(this, toolbar, tutor);
 
-        adapter = new CustomAdapter();
+        adapter = new customAdapter();
 
         ListView newsItems = (ListView) (findViewById(R.id.newsItems));
         newsItems.setAdapter(adapter);
@@ -94,10 +94,10 @@ public class TutorMyQuestions extends AppCompatActivity {
     }
 
 
-    private class CustomAdapter extends ArrayAdapter<Question> {
+    private class customAdapter extends ArrayAdapter<Question> {
 
 
-        public CustomAdapter() {
+        public customAdapter() {
             super(TutorMyQuestions.this, R.layout.activity_tutor_view_question, questions);
         }
 
