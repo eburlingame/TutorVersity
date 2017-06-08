@@ -17,7 +17,7 @@ import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 public class TutorSidebarMenu implements Drawer.OnDrawerItemClickListener
 {
     private Drawer drawer;
-    private Tutor student;
+    private Tutor tutor;
     private Activity activity;
 
     private PrimaryDrawerItem dashboardItem = new PrimaryDrawerItem().withIdentifier(1).withName("Dashboard")
@@ -33,9 +33,9 @@ public class TutorSidebarMenu implements Drawer.OnDrawerItemClickListener
     private PrimaryDrawerItem logoutItem = new PrimaryDrawerItem().withIdentifier(7).withName("Logout")
             .withIcon(R.drawable.ic_clear_black_24dp);
 
-    public TutorSidebarMenu(final Activity activity, Toolbar toolbar, Tutor student)
+    public TutorSidebarMenu(final Activity activity, Toolbar toolbar, Tutor tutor)
     {
-        this.student = student;
+        this.tutor = tutor;
         this.activity = activity;
         //create the drawer and remember the `Drawer` drawer object
         drawer = new DrawerBuilder()
@@ -59,7 +59,7 @@ public class TutorSidebarMenu implements Drawer.OnDrawerItemClickListener
         if (drawerItem.equals(dashboardItem))
         {
             Intent intent = new Intent(activity.getBaseContext(), TutorDashboard.class);
-            intent.putExtra(USER, student.toJSON().toString());
+            intent.putExtra(USER, tutor.toJSON().toString());
             activity.startActivity(intent);
 
         }
@@ -70,7 +70,7 @@ public class TutorSidebarMenu implements Drawer.OnDrawerItemClickListener
         else if (drawerItem.equals(nearbyQuestions))
         {
             Intent intent = new Intent(activity.getBaseContext(), TutorMyQuestions.class);
-            intent.putExtra(USER, student.toJSON().toString());
+            intent.putExtra(USER, tutor.toJSON().toString());
             activity.startActivity(intent);
         }
         else if (drawerItem.equals(messagesItem))
