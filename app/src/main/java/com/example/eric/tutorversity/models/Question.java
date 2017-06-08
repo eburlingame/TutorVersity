@@ -6,6 +6,22 @@ import java.util.concurrent.TimeUnit;
 
 public class Question implements Serializable {
 
+    public String getAsker() {
+        return asker;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
     public String asker;
     public String title;
     public String question;

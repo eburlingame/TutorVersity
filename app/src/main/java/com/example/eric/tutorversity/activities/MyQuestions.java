@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +31,8 @@ import java.util.List;
 import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 public class MyQuestions extends AppCompatActivity {
-    private Student student;
     private List<Question> questions = new ArrayList<>();
     private ArrayAdapter<Question> adapter;
-    private ListView newsItems;
 
     private class DataHandler implements Response.Listener<GetUserQuestionsResponse>
     {
@@ -50,7 +47,7 @@ public class MyQuestions extends AppCompatActivity {
         {
             questions = response.getQuestions();
             adapter.addAll(questions);
-            if(questions == null || questions.size() == 0) {
+            if(questions == null || questions.isEmpty()) {
                 Toast toast = Toast.makeText(MyQuestions.this, "No Question\n To Display", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
@@ -64,7 +61,7 @@ public class MyQuestions extends AppCompatActivity {
         setContentView(R.layout.activity_my_questions_list);
 
         String json = getIntent().getExtras().getString(USER);
-        student = new Student(json);
+        Student student = new Student(json);
         DataHandler handler = new DataHandler(student);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -72,7 +69,7 @@ public class MyQuestions extends AppCompatActivity {
 
         adapter = new customAdapter();
 
-        newsItems = (ListView) (findViewById(R.id.newsItems));
+        ListView newsItems = (ListView) (findViewById(R.id.newsItems));
 
         newsItems.setAdapter(adapter);
 
@@ -107,9 +104,9 @@ public class MyQuestions extends AppCompatActivity {
             TextView question = (TextView) convertView.findViewById(R.id.desc);
             TextView heading = (TextView) convertView.findViewById(R.id.heading);
 
-            heading.setText(currentItem.title);
-            question.setText(currentItem.question);
-            newsImage.setImageResource(getImage(currentItem.subject));
+            heading.setText(currentItem.getTitle());
+            question.setText(currentItem.getQuestion());
+            newsImage.setImageResource(getImage(currentItem.getSubject()));
 
 
             return convertView;

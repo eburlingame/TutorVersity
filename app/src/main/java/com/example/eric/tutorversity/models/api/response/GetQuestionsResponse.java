@@ -1,9 +1,6 @@
 package com.example.eric.tutorversity.models.api.response;
 
 import com.example.eric.tutorversity.models.Question;
-import com.example.eric.tutorversity.models.Student;
-import com.example.eric.tutorversity.models.Tutor;
-import com.example.eric.tutorversity.models.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,13 +11,7 @@ import java.util.List;
 
 import static com.example.eric.tutorversity.models.api.JSONConstants.EMAIL;
 import static com.example.eric.tutorversity.models.api.JSONConstants.QUESTION;
-import static com.example.eric.tutorversity.models.api.JSONConstants.STATUS;
 import static com.example.eric.tutorversity.models.api.JSONConstants.SUBJECT;
-import static com.example.eric.tutorversity.models.api.JSONConstants.SUCCESS;
-import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
-import static com.example.eric.tutorversity.models.api.JSONConstants.USER_TYPE;
-import static com.example.eric.tutorversity.models.api.JSONConstants.USER_TYPE_STUDENT;
-import static com.example.eric.tutorversity.models.api.JSONConstants.USER_TYPE_TUTOR;
 
 public class GetQuestionsResponse {
 

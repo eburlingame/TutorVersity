@@ -1,6 +1,5 @@
 package com.example.eric.tutorversity.models;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
@@ -10,7 +9,7 @@ import static com.example.eric.tutorversity.models.Util.fromJSON;
 
 public class Student extends User implements Serializable {
 
-    List<Question> questions;
+    private List<Question> questions;
 
     public Student(String jsonString) {
         this(fromJSON(jsonString));
@@ -24,4 +23,7 @@ public class Student extends User implements Serializable {
         return super.toJSON();
     }
 
+    public List<Question> getQuestions() { return questions;}
+
+    public void setQuestions(List<Question> questions) {this.questions = questions;}
 }

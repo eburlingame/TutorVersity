@@ -1,7 +1,5 @@
 package com.example.eric.tutorversity.models.api.response;
 
-import android.util.Log;
-
 import com.example.eric.tutorversity.models.Student;
 import com.example.eric.tutorversity.models.Tutor;
 import com.example.eric.tutorversity.models.User;

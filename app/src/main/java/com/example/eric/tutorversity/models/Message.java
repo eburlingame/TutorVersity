@@ -7,13 +7,19 @@ import java.util.Date;
  */
 
 public class Message {
-    Conversation conversation;
-    User from;
-    User to;
-    Date timestamp;
 
     private String text;
     private String sender;
+
+    public Message()
+    {
+
+    }
+    public Message(String s, String t)
+    {
+        text = t;
+        sender = s;
+    }
 
     public String getText() {
         return text;

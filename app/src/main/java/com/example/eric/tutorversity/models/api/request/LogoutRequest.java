@@ -7,7 +7,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.eric.tutorversity.models.User;
-import com.example.eric.tutorversity.models.api.response.AuthResponse;
 import com.example.eric.tutorversity.models.api.response.LogoutResponse;
 
 import org.json.JSONException;
@@ -16,8 +15,6 @@ import org.json.JSONObject;
 import java.util.Arrays;
 
 import static com.example.eric.tutorversity.models.api.JSONConstants.EMAIL;
-import static com.example.eric.tutorversity.models.api.JSONConstants.PASSWORD;
-import static com.example.eric.tutorversity.models.api.URLConstants.AUTH_URL;
 import static com.example.eric.tutorversity.models.api.URLConstants.LOGOUT_URL;
 
 public class LogoutRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
@@ -67,6 +64,6 @@ public class LogoutRequest implements Response.Listener<JSONObject>, Response.Er
 
     @Override
     public void onErrorResponse(VolleyError error) {
-
+        Log.d("E", error.getMessage());
     }
 }

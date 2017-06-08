@@ -34,6 +34,7 @@ public class AuthRequest implements Response.Listener<JSONObject>, Response.Erro
                     .put(EMAIL, username)
                     .put(PASSWORD, password);
         } catch (JSONException e) {
+            Log.e("E", e.getMessage(), e);
             return null;
         }
     }
@@ -57,7 +58,7 @@ public class AuthRequest implements Response.Listener<JSONObject>, Response.Erro
         try {
             authResponse = new AuthResponse(response);
         } catch (JSONException e) {
-            Log.d("E", e.getMessage() + Arrays.toString(e.getStackTrace()));
+            Log.e("E", e.getMessage(), e);
             authResponse = AuthResponse.failed();
         }
         responseListener.onResponse(authResponse);
@@ -65,6 +66,6 @@ public class AuthRequest implements Response.Listener<JSONObject>, Response.Erro
 
     @Override
     public void onErrorResponse(VolleyError error) {
-
+        Log.d("E", error.getMessage());
     }
 }
