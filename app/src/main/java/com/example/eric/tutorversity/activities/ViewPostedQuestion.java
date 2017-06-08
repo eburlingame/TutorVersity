@@ -26,17 +26,19 @@ public class ViewPostedQuestion extends AppCompatActivity {
         Question question = (Question) i.getSerializableExtra("QUESTION_ID");
 
         //Labels
-        EditText subjectLabel = (EditText) findViewById(R.id.subjectLabel);
-        subjectLabel.setText(question.getSubject());
-
-        EditText timeLabel = (EditText) findViewById(R.id.timeLabel);
-        timeLabel.setText(new Date().toString());
 
         EditText titleLabel = (EditText) findViewById(R.id.questionTitleLabel);
         titleLabel.setText(question.getTitle());
 
+
         EditText questionLabel = (EditText) findViewById(R.id.questionBody);
         questionLabel.setText(question.getQuestion());
+
+        EditText timeLabel = (EditText) findViewById(R.id.timeLabel);
+        timeLabel.setText(new Date().toString());
+
+        EditText subjectLabel = (EditText) findViewById(R.id.subjectLabel);
+        subjectLabel.setText(question.getSubject());
 
     }
 }

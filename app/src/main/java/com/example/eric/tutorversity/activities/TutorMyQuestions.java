@@ -121,6 +121,10 @@ public class TutorMyQuestions extends AppCompatActivity {
                 }
             });
 
+            heading.setText(currentItem.getTitle());
+            question.setText(currentItem.getQuestion());
+            newsImage.setImageResource(getImage(currentItem.getSubject()));
+
             ImageView reply = (ImageView) view.findViewById(R.id.reply);
             reply.setFocusable(false);
             reply.setOnClickListener(new View.OnClickListener() {
@@ -132,9 +136,7 @@ public class TutorMyQuestions extends AppCompatActivity {
             });
 
 
-            heading.setText(currentItem.getTitle());
-            question.setText(currentItem.getQuestion());
-            newsImage.setImageResource(getImage(currentItem.getSubject()));
+
 
 
             return view;
@@ -143,19 +145,22 @@ public class TutorMyQuestions extends AppCompatActivity {
         private int getImage(String subject) {
             if (subject.equals("Chemistry")) {
                 return R.mipmap.ic_chem;
-            } else if (subject.equalsIgnoreCase("Physics")) {
+            }
+            else if (subject.equalsIgnoreCase("Computer Engineering")) {
+                return R.mipmap.ic_cpe;
+            }
+            else if (subject.equalsIgnoreCase("Physics")) {
                 return R.mipmap.ic_phys;
+            } else if (subject.equalsIgnoreCase("Math")) {
+                return R.mipmap.ic_math;
             } else if (subject.equalsIgnoreCase("English")) {
                 return R.mipmap.ic_engl;
             } else if (subject.equalsIgnoreCase("Biology")) {
                 return R.mipmap.ic_bio;
-            } else if (subject.equalsIgnoreCase("Math")) {
-                return R.mipmap.ic_math;
-            } else if (subject.equalsIgnoreCase("Mechanical Engineering")) {
+            }  else if (subject.equalsIgnoreCase("Mechanical Engineering")) {
                 return R.mipmap.ic_me;
-            } else if (subject.equalsIgnoreCase("Computer Engineering")) {
-                return R.mipmap.ic_cpe;
-            } else {
+            }
+            else {
                 return R.mipmap.ic_launcher_round;
             }
         }
