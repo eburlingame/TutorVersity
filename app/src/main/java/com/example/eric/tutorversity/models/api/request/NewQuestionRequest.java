@@ -14,8 +14,6 @@ import com.example.eric.tutorversity.models.api.response.NewQuestionResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Arrays;
-
 import static com.example.eric.tutorversity.models.api.JSONConstants.EMAIL;
 import static com.example.eric.tutorversity.models.api.JSONConstants.LATITUDE;
 import static com.example.eric.tutorversity.models.api.JSONConstants.LONGITUDE;
@@ -45,9 +43,10 @@ public class NewQuestionRequest implements Response.Listener<JSONObject>, Respon
                     .put(TOKEN, user.getToken())
                     .put(QUESTION, question.getQuestion())
                     .put(SUBJECT, question.getSubject())
-                    .put(LATITUDE, 45)
-                    .put(LONGITUDE, -120);
+                    .put(LATITUDE, location.getLatitude())
+                    .put(LONGITUDE, location.getLongitude());
         } catch (JSONException e) {
+            Log.e("E", e.getMessage(), e);
             return null;
         }
     }
@@ -71,7 +70,7 @@ public class NewQuestionRequest implements Response.Listener<JSONObject>, Respon
         try {
             questionResponse = new NewQuestionResponse(response);
         } catch (JSONException e) {
-            Log.d("E", e.getMessage() + Arrays.toString(e.getStackTrace()));
+            Log.e("E", e.getMessage(), e);
             questionResponse = NewQuestionResponse.failed();
         }
         responseListener.onResponse(questionResponse);

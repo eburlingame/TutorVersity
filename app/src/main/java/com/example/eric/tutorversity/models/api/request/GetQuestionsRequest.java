@@ -12,8 +12,6 @@ import com.example.eric.tutorversity.models.api.response.GetQuestionsResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Arrays;
-
 import static com.example.eric.tutorversity.models.api.JSONConstants.EMAIL;
 import static com.example.eric.tutorversity.models.api.JSONConstants.TOKEN;
 import static com.example.eric.tutorversity.models.api.URLConstants.GET_QUESTIONS_URL;
@@ -33,6 +31,7 @@ public class GetQuestionsRequest implements Response.Listener<JSONObject>, Respo
                     .put(EMAIL, user.getEmail())
                     .put(TOKEN, user.getToken());
         } catch (JSONException e) {
+            Log.e("E", e.getMessage(), e);
             return null;
         }
     }
@@ -56,7 +55,7 @@ public class GetQuestionsRequest implements Response.Listener<JSONObject>, Respo
         try {
             qResponse = new GetQuestionsResponse(response);
         } catch (JSONException e) {
-            Log.d("E", e.getMessage() + Arrays.toString(e.getStackTrace()));
+            Log.e("E", e.getMessage(), e);
             qResponse = GetQuestionsResponse.failed();
         }
         responseListener.onResponse(qResponse);

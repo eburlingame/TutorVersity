@@ -11,10 +11,7 @@ import com.example.eric.tutorversity.models.api.response.AuthResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Arrays;
-
 import static com.example.eric.tutorversity.models.api.JSONConstants.EMAIL;
-import static com.example.eric.tutorversity.models.api.JSONConstants.PASSWORD;
 import static com.example.eric.tutorversity.models.api.URLConstants.AUTH_URL;
 
 public class AuthRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
@@ -32,7 +29,7 @@ public class AuthRequest implements Response.Listener<JSONObject>, Response.Erro
         try {
             return new JSONObject()
                     .put(EMAIL, username)
-                    .put(PASSWORD, password);
+                    .put("password", password);
         } catch (JSONException e) {
             Log.e("E", e.getMessage(), e);
             return null;

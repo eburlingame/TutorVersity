@@ -1,5 +1,7 @@
 package com.example.eric.tutorversity.models;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,7 +14,6 @@ public class User {
     private String bio;
     private String name;
     private String token;
-    private Location currentLocation;
     private boolean showMyLocation;
 
     public User(JSONObject jsonObject) {
@@ -22,11 +23,9 @@ public class User {
             bio = jsonObject.getString(BIO);
             name = jsonObject.getString(NAME);
             token = jsonObject.getString(TOKEN);
-            currentLocation = null;
         }
-        catch (JSONException e)
-        {
-            throw new RuntimeException("Could not parse JSON." + e.getMessage());
+        catch (JSONException e) {
+            Log.e("E", e.getMessage(), e);
         }
     }
 
@@ -41,7 +40,7 @@ public class User {
             this.name = name;
         }
         catch (Exception e) {
-            throw new RuntimeException("Could not create User." + e.getMessage());
+            Log.e("E", e.getMessage(), e);
         }
     }
 
@@ -55,7 +54,8 @@ public class User {
 //                    .put(LOCATION, currentLocation’.toJSON())
                     .put(SHOW_MY_LOCATION, showMyLocation);
         } catch (JSONException e) {
-            throw new RuntimeException("JSON could not be parsed for some reason");
+            Log.e("E", e.getMessage(), e);
+            return null;
         }
     }
 

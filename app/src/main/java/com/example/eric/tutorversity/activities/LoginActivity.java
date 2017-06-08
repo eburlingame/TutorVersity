@@ -243,7 +243,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
     private interface ProfileQuery {
-        String[] PROJECTION = {
+        public String[] PROJECTION = {
                 ContactsContract.CommonDataKinds.Email.ADDRESS,
                 ContactsContract.CommonDataKinds.Email.IS_PRIMARY,
         };

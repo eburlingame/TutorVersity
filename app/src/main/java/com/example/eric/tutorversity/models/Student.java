@@ -19,10 +19,6 @@ public class Student extends User implements Serializable {
         super(jsonObject);
     }
 
-    public JSONObject toJSON() {
-        return super.toJSON();
-    }
-
     public List<Question> getQuestions() { return questions;}
 
     public void setQuestions(List<Question> questions) {this.questions = questions;}

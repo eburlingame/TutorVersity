@@ -9,8 +9,6 @@ import static com.example.eric.tutorversity.models.Util.fromJSON;
 
 public class Tutor extends User implements Serializable {
 
-    private Set<String> subjects;
-
     public Tutor(String jsonString) {
         this(fromJSON(jsonString));
     }

@@ -3,7 +3,6 @@ package com.example.eric.tutorversity.models.api;
 public class JSONConstants {
 
     public static final String EMAIL = "email";
-    public static final String PASSWORD = "password";
     public static final String SESSION_ID = "token";
 
     public static final String STATUS = "status";
@@ -25,4 +24,5 @@ public class JSONConstants {
     public static final String LONGITUDE = "longitude";
     public static final String SHOW_MY_LOCATION = "show_my_location";
 
+    private JSONConstants() {}
 }
