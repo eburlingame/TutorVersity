@@ -131,7 +131,9 @@ public class TutorMyQuestions extends AppCompatActivity {
             reply.setFocusable(false);
             reply.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Log.i("CLICKED", "REPLY");
+                    Intent intent = new Intent(getBaseContext(), ConversationTutors.class);
+                    intent.putExtra(USER, tutor.toJSON().toString());
+                    startActivity(intent);
                 }
             });
 
