@@ -2,11 +2,13 @@ package com.example.eric.tutorversity.activities;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.eric.tutorversity.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,18 +16,20 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class NearbyTutorsMap extends FragmentActivity implements OnMapReadyCallback {
+public class NearbyTutorsMap extends AppCompatActivity implements OnMapReadyCallback {
 
-    public static int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION =1;
     private GoogleMap mMap;
-    private Activity thisActivity;
+    private Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby_tutors_map);
-        thisActivity = this;
+        activity = this;
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -45,6 +49,13 @@ public class NearbyTutorsMap extends FragmentActivity implements OnMapReadyCallb
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent intent = new Intent(NearbyTutorsMap.this, ViewTutor.class);
+                startActivity(intent);
+            }
+        });
 
         LatLng slo = new LatLng(35.3050, -120.6625);
         LatLng adam = new LatLng(35.2950, -120.6525);
@@ -57,9 +68,15 @@ public class NearbyTutorsMap extends FragmentActivity implements OnMapReadyCallb
         mMap.addMarker(new MarkerOptions().position(julie).title("Julie"));
         mMap.addMarker(new MarkerOptions().position(matt).title("Matt"));
 
-
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(slo, 14));
     }
+
+
+//    @Override
+//    public boolean onMarkerClick(Marker marker) {
+//
+//        return true;
+//    }
 
 
 }

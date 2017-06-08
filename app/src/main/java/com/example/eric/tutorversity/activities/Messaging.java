@@ -41,12 +41,20 @@ public class Messaging extends AppCompatActivity implements View.OnClickListener
         recipient = "Kartik";
 
         Message temp = new Message();
-        temp.setSender("Eric");
-        temp.setText("Hello");
+        Message temp1 = new Message();
+        Message temp2 = new Message();
+        temp.setSender("Adam");
+        temp.setText("Hey! I figured out\nthe answer to your\nquestion.");
 
         listView = (ListView)findViewById(R.id.messages_list);
         messages = new ArrayList<>();
         messages.add(temp);
+        temp1.setSender("Kartik");
+        temp1.setText("That's awesome! I\nthink we should meet up");
+        messages.add(temp1);
+        temp2.setSender("Adam");
+        temp2.setText("I'll be free tomorrow\nafter 5 pm.");
+        messages.add(temp2);
         adapter = new MessagesAdapter(messages);
         listView.setAdapter(adapter);
 
@@ -60,7 +68,7 @@ public class Messaging extends AppCompatActivity implements View.OnClickListener
         Button sendMessage = (Button)findViewById(R.id.send_message);
         sendMessage.setOnClickListener(this);
 
-        String[] ids = {"Eric", "-", "Kartik"};
+        String[] ids = {"Adam", "-", "Kartik"};
         Arrays.sort(ids);
         convoID = ids[0] + ids[1] + ids[2];
     }

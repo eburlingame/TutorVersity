@@ -40,10 +40,10 @@ public class Conversations extends AppCompatActivity {
         context = this;
         conversations = new ArrayList<>();
         Conversation temp = new Conversation();
-        temp.setConversationID("Eric");
+        temp.setConversationID("Adam");
         conversations.add(temp);
         temp = new Conversation();
-        temp.setConversationID("Garret");
+        temp.setConversationID("Julie");
         conversations.add(temp);
         adapter = new ArrayAdapter<Conversation>(this, android.R.layout.simple_list_item_1, conversations);
         listView.setAdapter(adapter);

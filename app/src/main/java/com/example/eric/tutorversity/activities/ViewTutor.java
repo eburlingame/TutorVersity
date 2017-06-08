@@ -3,6 +3,7 @@ package com.example.eric.tutorversity.activities;
 import android.media.Rating;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,8 +11,13 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 
 import com.example.eric.tutorversity.R;
+import com.example.eric.tutorversity.models.Student;
+
+import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 public class ViewTutor extends AppCompatActivity {
+
+    private Student student;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
