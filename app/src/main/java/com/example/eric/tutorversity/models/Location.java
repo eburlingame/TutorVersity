@@ -7,7 +7,6 @@ public class Location {
     private double latitude;
     private double longitude;
 
-<<<<<<< Updated upstream
     public String getLocName() {
         return locName;
     }
@@ -29,15 +28,9 @@ public class Location {
         locAreaCode = lc;
     }
 
-=======
->>>>>>> Stashed changes
     public Location(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
-    }
-
-    public JSONObject toJSON() {
-        return new JSONObject();
     }
 
     public double getLatitude() {
