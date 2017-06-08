@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 
-        if (getIntent().getExtras() != null)
+        if (getIntent() != null && getIntent().getExtras() != null)
         {
             String userJSON = getIntent().getExtras().getString(USER);
             User user = new User(userJSON);

@@ -46,8 +46,7 @@
             android:name=".activities.Settings"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.ViewQuestion" />
-        <activity android:name=".activities.ViewTutor"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".activities.ViewTutor" />
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.TutorDashboard" />
         <activity
