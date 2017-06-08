@@ -24,7 +24,7 @@ import com.android.volley.Response;
 import com.example.eric.tutorversity.OurSingleton;
 import com.example.eric.tutorversity.R;
 import com.example.eric.tutorversity.models.Question;
-import com.example.eric.tutorversity.models.Student;
+import com.example.eric.tutorversity.models.Tutor;
 import com.example.eric.tutorversity.models.User;
 import com.example.eric.tutorversity.models.api.request.GetQuestionsRequest;
 import com.example.eric.tutorversity.models.api.request.GetUserQuestionsRequest;
@@ -42,7 +42,7 @@ import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 public class TutorMyQuestions extends AppCompatActivity {
 
-    private Student student;
+    private Tutor tutor;
     private List<Question> questions = new ArrayList<>();
     private ArrayAdapter<Question> adapter;
     private ListView newsItems;
@@ -73,15 +73,16 @@ public class TutorMyQuestions extends AppCompatActivity {
         setContentView(R.layout.activity_tutor_view_question);
 
         String json = getIntent().getExtras().getString(USER);
-        student = new Student(json);
+        tutor = new Tutor(json);
 
+        DataHandler handler = new DataHandler(tutor);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        StudentSidebarMenu menu = new StudentSidebarMenu(this, toolbar, student);
+        TutorSidebarMenu menu = new TutorSidebarMenu(this, toolbar, tutor);
 
-        ArrayAdapter<Question> adapter = new customAdapter();
+        adapter = new customAdapter();
 
-        ListView newsItems = (ListView) (findViewById(R.id.newsItems));
+        newsItems = (ListView) (findViewById(R.id.newsItems));
         newsItems.setAdapter(adapter);
 
         newsItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
