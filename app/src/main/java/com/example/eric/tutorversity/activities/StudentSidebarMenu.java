@@ -85,11 +85,15 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
         }
         else if (drawerItem.equals(nearbyTutorsItem))
         {
-
+            Intent intent = new Intent(activity.getBaseContext(), NearbyTutorsMap.class);
+            intent.putExtra(USER, student.toJSON().toString());
+            activity.startActivity(intent);
         }
         else if (drawerItem.equals(messagesItem))
         {
-
+            Intent intent = new Intent(activity.getBaseContext(), Conversations.class);
+            intent.putExtra(USER, student.toJSON().toString());
+            activity.startActivity(intent);
         }
         else if (drawerItem.equals(settingsItem))
         {
