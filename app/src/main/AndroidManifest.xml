@@ -45,10 +45,16 @@
         <activity
             android:name=".activities.Settings"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.ViewQuestion" />
+        <activity android:name=".activities.TutorMyQuestions"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".activities.ViewQuestion"
+            android:parentActivityName=".activities.MyQuestions"/>
+        <activity android:name=".activities.ViewPostedQuestion"
+            android:parentActivityName=".activities.TutorMyQuestions"/>
         <activity android:name=".activities.ViewTutor" />
         <activity android:name=".activities.SignUpActivity" />
-        <activity android:name=".activities.TutorDashboard" />
+        <activity android:name=".activities.TutorDashboard"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activities.Conversations"
             android:theme="@style/AppTheme.NoActionBar" />
