@@ -28,7 +28,7 @@ public class AuthRequest implements Response.Listener<JSONObject>, Response.Erro
         this.password = password;
     }
 
-    public JSONObject getJSONObject() {
+    private JSONObject getJSONObject() {
         try {
             return new JSONObject()
                     .put(EMAIL, username)
@@ -48,7 +48,6 @@ public class AuthRequest implements Response.Listener<JSONObject>, Response.Erro
                 this,
                 this);
     }
-
 
     @Override
     public void onResponse(JSONObject response) {

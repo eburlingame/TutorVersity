@@ -7,8 +7,27 @@ import java.util.Date;
  */
 
 public class Message {
-    MessageConversation conversation;
+    Conversation conversation;
     User from;
     User to;
     Date timestamp;
+
+    private String text;
+    private String sender;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
 }

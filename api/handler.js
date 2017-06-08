@@ -3,6 +3,9 @@
 const registerUser = require('./actions/registerUser.js');
 const auth = require('./actions/auth.js');
 const logout = require('./actions/logout.js');
+const newQuestion = require('./actions/newQuestion.js');
+const getQuestions = require('./actions/getQuestions.js');
+const getUserQuestions = require('./actions/getUserQuestions.js');
 
 function getPayload(event) {
   if (typeof event.body === "object")
@@ -31,6 +34,21 @@ module.exports.registerUser = (event, context, cb) => registerUser.registerUser(
 
 
 module.exports.auth = (event, context, cb) => auth.auth(getPayload(event), responseData => {
+  successResponse(responseData, cb);
+});
+
+module.exports.newQuestion = (event, context, cb) => newQuestion.newQuestion(getPayload(event), 
+  responseData => {
+  successResponse(responseData, cb);
+});
+
+module.exports.getQuestions = (event, context, cb) => getQuestions.getQuestions(getPayload(event), 
+  responseData => {
+  successResponse(responseData, cb);
+});
+
+module.exports.getUserQuestions = (event, context, cb) => getUserQuestions.getUserQuestions(getPayload(event), 
+  responseData => {
   successResponse(responseData, cb);
 });
 

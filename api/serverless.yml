@@ -34,6 +34,27 @@ functions:
     - http:
         path: auth
         method: post
+        cors: true  
+  newQuestion:
+    handler: handler.newQuestion
+    events:
+    - http:
+        path: newQuestion
+        method: post
+        cors: true
+  getQuestions:
+    handler: handler.getQuestions
+    events:
+    - http:
+        path: getQuestions
+        method: post
+        cors: true
+  getUserQuestions:
+    handler: handler.getUserQuestions
+    events:
+    - http:
+        path: getUserQuestions
+        method: post
         cors: true
   logout:
     handler: handler.logout
@@ -55,7 +76,7 @@ resources:
   Resources:
     UserTable: 
       Type: "AWS::DynamoDB::Table"
-      Properties: 
+      Properties:
         AttributeDefinitions: 
         - AttributeName: "email"
           AttributeType: "S"
@@ -79,3 +100,16 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: "tutorv-questions"
+    MessagesTable: 
+      Type: "AWS::DynamoDB::Table"
+      Properties: 
+        AttributeDefinitions: 
+        - AttributeName: "id"
+          AttributeType: "S"
+        KeySchema: 
+        - AttributeName: "id"
+          KeyType: "HASH"
+        ProvisionedThroughput: 
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: "tutorv-messages"

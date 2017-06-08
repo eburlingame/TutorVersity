@@ -40,4 +40,5 @@
         <item>Questions #1</item>
         <item>Questions #2</item>
     </string-array>
+    <string name="title_activity_nearby_tutors_map">Map</string>
 </resources>
