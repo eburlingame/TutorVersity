@@ -7,7 +7,6 @@ import android.widget.EditText;
 
 import com.example.eric.tutorversity.R;
 import com.example.eric.tutorversity.models.Question;
-import com.example.eric.tutorversity.models.User;
 
 import java.util.Date;
 
@@ -28,16 +27,16 @@ public class ViewPostedQuestion extends AppCompatActivity {
 
         //Labels
         EditText subjectLabel = (EditText) findViewById(R.id.subjectLabel);
-        subjectLabel.setText(question.subject);
+        subjectLabel.setText(question.getSubject());
 
         EditText timeLabel = (EditText) findViewById(R.id.timeLabel);
         timeLabel.setText(new Date().toString());
 
         EditText titleLabel = (EditText) findViewById(R.id.questionTitleLabel);
-        titleLabel.setText(question.title);
+        titleLabel.setText(question.getTitle());
 
         EditText questionLabel = (EditText) findViewById(R.id.questionBody);
-        questionLabel.setText(question.question);
+        questionLabel.setText(question.getQuestion());
 
     }
 }

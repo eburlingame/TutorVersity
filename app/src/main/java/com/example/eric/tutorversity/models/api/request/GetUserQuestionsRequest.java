@@ -7,7 +7,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.eric.tutorversity.models.User;
-import com.example.eric.tutorversity.models.api.response.GetQuestionsResponse;
 import com.example.eric.tutorversity.models.api.response.GetUserQuestionsResponse;
 
 import org.json.JSONException;
@@ -17,7 +16,6 @@ import java.util.Arrays;
 
 import static com.example.eric.tutorversity.models.api.JSONConstants.EMAIL;
 import static com.example.eric.tutorversity.models.api.JSONConstants.TOKEN;
-import static com.example.eric.tutorversity.models.api.URLConstants.GET_QUESTIONS_URL;
 import static com.example.eric.tutorversity.models.api.URLConstants.GET_USER_QUESTIONS_URL;
 
 public class GetUserQuestionsRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
@@ -66,6 +64,6 @@ public class GetUserQuestionsRequest implements Response.Listener<JSONObject>, R
 
     @Override
     public void onErrorResponse(VolleyError error) {
-
+        Log.d("E", error.getMessage());
     }
 }

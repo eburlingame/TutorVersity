@@ -6,7 +6,7 @@ import com.example.eric.tutorversity.models.User;
 
 public class OurApplication extends Application {
 
-    public static User currentUser;
+    private static User currentUser;
 
     // Called when the application is starting, before any other application objects have been created.
     // Overriding this method is totally optional!
