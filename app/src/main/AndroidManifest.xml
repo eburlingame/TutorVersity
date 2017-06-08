@@ -54,7 +54,8 @@
         <activity
             android:name=".activities.TutorMyQuestions"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.TutorDashboard"></activity>
+        <activity android:name=".activities.TutorDashboard"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

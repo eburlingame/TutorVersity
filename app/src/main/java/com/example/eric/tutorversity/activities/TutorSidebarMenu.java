@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.eric.tutorversity.R;
-import com.example.eric.tutorversity.models.Student;
+import com.example.eric.tutorversity.models.Tutor;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
@@ -17,7 +17,7 @@ import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 public class TutorSidebarMenu implements Drawer.OnDrawerItemClickListener
 {
     private Drawer drawer;
-    private Student student;
+    private Tutor student;
     private Activity activity;
 
     private PrimaryDrawerItem dashboardItem = new PrimaryDrawerItem().withIdentifier(1).withName("Dashboard")
@@ -33,7 +33,7 @@ public class TutorSidebarMenu implements Drawer.OnDrawerItemClickListener
     private PrimaryDrawerItem logoutItem = new PrimaryDrawerItem().withIdentifier(7).withName("Logout")
             .withIcon(R.drawable.ic_clear_black_24dp);
 
-    public TutorSidebarMenu(final Activity activity, Toolbar toolbar, Student student)
+    public TutorSidebarMenu(final Activity activity, Toolbar toolbar, Tutor student)
     {
         this.student = student;
         this.activity = activity;
