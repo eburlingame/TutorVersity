@@ -1,13 +1,11 @@
 package com.example.eric.tutorversity.activities;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -24,12 +22,11 @@ import com.android.volley.Response;
 import com.example.eric.tutorversity.OurSingleton;
 import com.example.eric.tutorversity.R;
 import com.example.eric.tutorversity.models.Question;
+import com.example.eric.tutorversity.models.Student;
 import com.example.eric.tutorversity.models.Tutor;
 import com.example.eric.tutorversity.models.User;
 import com.example.eric.tutorversity.models.api.request.GetQuestionsRequest;
-import com.example.eric.tutorversity.models.api.request.GetUserQuestionsRequest;
 import com.example.eric.tutorversity.models.api.response.GetQuestionsResponse;
-import com.example.eric.tutorversity.models.api.response.GetUserQuestionsResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +39,9 @@ import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 public class TutorMyQuestions extends AppCompatActivity {
 
-    private Tutor tutor;
+    Tutor tutor;
     private List<Question> questions = new ArrayList<>();
     private ArrayAdapter<Question> adapter;
-    private ListView newsItems;
 
     private class DataHandler implements Response.Listener<GetQuestionsResponse>
     {
@@ -60,7 +56,7 @@ public class TutorMyQuestions extends AppCompatActivity {
         {
             questions = response.getQuestions();
             adapter.addAll(questions);
-            if(questions == null || questions.size() == 0) {
+            if(questions == null || questions.isEmpty()) {
                 Toast toast = Toast.makeText(TutorMyQuestions.this, "No Question\n To Display", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
@@ -74,15 +70,16 @@ public class TutorMyQuestions extends AppCompatActivity {
 
         String json = getIntent().getExtras().getString(USER);
         tutor = new Tutor(json);
+        Student student = new Student(json);
 
         DataHandler handler = new DataHandler(tutor);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         TutorSidebarMenu menu = new TutorSidebarMenu(this, toolbar, tutor);
 
-        adapter = new customAdapter();
+        adapter = new CustomAdapter();
 
-        newsItems = (ListView) (findViewById(R.id.newsItems));
+        ListView newsItems = (ListView) (findViewById(R.id.newsItems));
         newsItems.setAdapter(adapter);
 
         newsItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -94,15 +91,13 @@ public class TutorMyQuestions extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
 
-    private class customAdapter extends ArrayAdapter<Question> {
+    private class CustomAdapter extends ArrayAdapter<Question> {
 
 
-        public customAdapter() {
+        public CustomAdapter() {
             super(TutorMyQuestions.this, R.layout.activity_tutor_view_question, questions);
         }
 
@@ -138,9 +133,9 @@ public class TutorMyQuestions extends AppCompatActivity {
             });
 
 
-            heading.setText(currentItem.title);
-            question.setText(currentItem.question);
-            newsImage.setImageResource(getImage(currentItem.subject));
+            heading.setText(currentItem.getTitle());
+            question.setText(currentItem.getQuestion());
+            newsImage.setImageResource(getImage(currentItem.getSubject()));
 
 
             return convertView;

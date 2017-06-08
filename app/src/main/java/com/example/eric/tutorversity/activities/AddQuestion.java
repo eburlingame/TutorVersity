@@ -1,20 +1,12 @@
 package com.example.eric.tutorversity.activities;
 
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -23,10 +15,7 @@ import com.example.eric.tutorversity.OurSingleton;
 import com.example.eric.tutorversity.R;
 import com.example.eric.tutorversity.models.Question;
 import com.example.eric.tutorversity.models.Student;
-import com.example.eric.tutorversity.models.User;
-import com.example.eric.tutorversity.models.api.request.GetUserQuestionsRequest;
 import com.example.eric.tutorversity.models.api.request.NewQuestionRequest;
-import com.example.eric.tutorversity.models.api.response.GetUserQuestionsResponse;
 import com.example.eric.tutorversity.models.api.response.NewQuestionResponse;
 
 import static com.example.eric.tutorversity.models.api.JSONConstants.USER;

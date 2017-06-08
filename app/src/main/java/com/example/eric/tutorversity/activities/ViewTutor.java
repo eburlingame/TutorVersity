@@ -1,6 +1,5 @@
 package com.example.eric.tutorversity.activities;
 
-import android.media.Rating;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;

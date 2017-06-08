@@ -13,8 +13,8 @@ import com.example.eric.tutorversity.models.Tutor;
 import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 public class TutorDashboard extends AppCompatActivity {
-    private Tutor tutor;
 
+    Tutor tutor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,5 +45,6 @@ public class TutorDashboard extends AppCompatActivity {
                     startActivity(intent);
             }
         });
+        new TutorSidebarMenu(this, toolbar, tutor);
     }
 }

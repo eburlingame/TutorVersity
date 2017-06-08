@@ -9,7 +9,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.eric.tutorversity.models.Location;
 import com.example.eric.tutorversity.models.Question;
 import com.example.eric.tutorversity.models.User;
-import com.example.eric.tutorversity.models.api.response.AuthResponse;
 import com.example.eric.tutorversity.models.api.response.NewQuestionResponse;
 
 import org.json.JSONException;
@@ -20,11 +19,9 @@ import java.util.Arrays;
 import static com.example.eric.tutorversity.models.api.JSONConstants.EMAIL;
 import static com.example.eric.tutorversity.models.api.JSONConstants.LATITUDE;
 import static com.example.eric.tutorversity.models.api.JSONConstants.LONGITUDE;
-import static com.example.eric.tutorversity.models.api.JSONConstants.PASSWORD;
 import static com.example.eric.tutorversity.models.api.JSONConstants.QUESTION;
 import static com.example.eric.tutorversity.models.api.JSONConstants.SUBJECT;
 import static com.example.eric.tutorversity.models.api.JSONConstants.TOKEN;
-import static com.example.eric.tutorversity.models.api.URLConstants.AUTH_URL;
 import static com.example.eric.tutorversity.models.api.URLConstants.NEW_QUESITON_URL;
 
 public class NewQuestionRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
@@ -46,8 +43,8 @@ public class NewQuestionRequest implements Response.Listener<JSONObject>, Respon
             return new JSONObject()
                     .put(EMAIL, user.getEmail())
                     .put(TOKEN, user.getToken())
-                    .put(QUESTION, question.question)
-                    .put(SUBJECT, question.subject)
+                    .put(QUESTION, question.getQuestion())
+                    .put(SUBJECT, question.getSubject())
                     .put(LATITUDE, 45)
                     .put(LONGITUDE, -120);
         } catch (JSONException e) {
@@ -82,6 +79,6 @@ public class NewQuestionRequest implements Response.Listener<JSONObject>, Respon
 
     @Override
     public void onErrorResponse(VolleyError error) {
-
+        Log.d("E", error.getMessage());
     }
 }
