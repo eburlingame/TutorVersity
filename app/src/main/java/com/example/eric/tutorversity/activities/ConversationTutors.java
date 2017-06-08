@@ -19,17 +19,9 @@ import java.util.ArrayList;
 
 import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
-/**
- * Created by GarrettLeone on 6/7/17.
- */
-
 public class ConversationTutors extends AppCompatActivity {
 
-    private ArrayAdapter<Conversation> adapter;
-    private ArrayList<Conversation> conversations;
-    private ListView listView;
     private Context context;
-    private Tutor tutor;
 
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -37,17 +29,17 @@ public class ConversationTutors extends AppCompatActivity {
         setContentView(R.layout.activity_conversations);
 
         String json = getIntent().getExtras().getString(USER);
-        tutor = new Tutor(json);
-        listView = (ListView)findViewById(R.id.conversations);
+        Tutor tutor = new Tutor(json);
+        ListView listView = (ListView)findViewById(R.id.conversations);
         context = this;
-        conversations = new ArrayList<>();
+        ArrayList<Conversation> conversations = new ArrayList<>();
         Conversation temp = new Conversation();
         temp.setConversationID("Joe");
         conversations.add(temp);
         temp = new Conversation();
         temp.setConversationID("Bob");
         conversations.add(temp);
-        adapter = new ArrayAdapter<Conversation>(this, android.R.layout.simple_list_item_1, conversations);
+        ArrayAdapter<Conversation> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, conversations);
         listView.setAdapter(adapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

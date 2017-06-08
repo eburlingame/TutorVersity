@@ -13,7 +13,6 @@ import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 public class Settings extends AppCompatActivity {
 
-    private Student student;
     private int seekStatus;
 
     @Override
@@ -23,7 +22,7 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.settings_layout);
 
         String json = getIntent().getExtras().getString(USER);
-        student = new Student(json);
+        Student student = new Student(json);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         new StudentSidebarMenu(this, toolbar, student);
@@ -44,7 +43,7 @@ public class Settings extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                // Nothing to change on start
             }
 
             @Override

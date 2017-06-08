@@ -25,10 +25,8 @@ import java.util.Arrays;
 public class Messaging extends AppCompatActivity implements View.OnClickListener {
 
     private MessagesAdapter adapter;
-    private String recipient;
-    private ListView listView;
     private ArrayList<Message> messages;
-    private String convoID;
+    private static final String KARTIK = "Kartik";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +36,6 @@ public class Messaging extends AppCompatActivity implements View.OnClickListener
         Intent intent = getIntent();
         String title = intent.getStringExtra("contact name");
         setTitle(title);
-        recipient = "Kartik";
 
         Message temp = new Message();
         Message temp1 = new Message();
@@ -46,10 +43,10 @@ public class Messaging extends AppCompatActivity implements View.OnClickListener
         temp.setSender("Adam");
         temp.setText("Hey! I figured out\nthe answer to your\nquestion.");
 
-        listView = (ListView)findViewById(R.id.messages_list);
+        ListView listView = (ListView)findViewById(R.id.messages_list);
         messages = new ArrayList<>();
         messages.add(temp);
-        temp1.setSender("Kartik");
+        temp1.setSender(KARTIK);
         temp1.setText("That's awesome! I\nthink we should meet up");
         messages.add(temp1);
         temp2.setSender("Adam");
@@ -57,8 +54,6 @@ public class Messaging extends AppCompatActivity implements View.OnClickListener
         messages.add(temp2);
         adapter = new MessagesAdapter(messages);
         listView.setAdapter(adapter);
-
-
 
         if (getSupportActionBar() != null)
         {
@@ -68,23 +63,22 @@ public class Messaging extends AppCompatActivity implements View.OnClickListener
         Button sendMessage = (Button)findViewById(R.id.send_message);
         sendMessage.setOnClickListener(this);
 
-        String[] ids = {"Adam", "-", "Kartik"};
+        String[] ids = {"Adam", "-", KARTIK};
         Arrays.sort(ids);
-        convoID = ids[0] + ids[1] + ids[2];
     }
 
     @Override
     public void onClick(View v) {
         EditText newMessageView = (EditText)findViewById(R.id.new_message);
 
-        String newMessage  = newMessageView.getText().toString();
+        String newMessage = newMessageView.getText().toString();
         newMessageView.setText("");
-        Message msg = new Message();
-        msg.setText(newMessage);
-        msg.setSender("Kartik");
-        if (msg.getText().length() > 0)
+        Message message = new Message();
+        message.setText(newMessage);
+        message.setSender(KARTIK);
+        if (message.getText().length() > 0)
         {
-            messages.add(msg);
+            messages.add(message);
             adapter.notifyDataSetChanged();
         }
     }
@@ -102,17 +96,18 @@ public class Messaging extends AppCompatActivity implements View.OnClickListener
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = super.getView(position, convertView, parent);
+
+            View view = super.getView(position, convertView, parent);
             Message message = getItem(position);
 
-            TextView nameView = (TextView) convertView.findViewById(R.id.message);
+            TextView nameView = (TextView) view.findViewById(R.id.message);
             nameView.setText(message.getText());
 
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) nameView.getLayoutParams();
 
             int sdk = Build.VERSION.SDK_INT;
 
-            if (message.getSender().equals("Kartik")) {
+            if (message.getSender().equals(KARTIK)) {
                 if (sdk >= Build.VERSION_CODES.JELLY_BEAN) {
                     nameView.setBackground(getDrawable(R.drawable.bubble_right_green));
                 } else {
@@ -131,7 +126,7 @@ public class Messaging extends AppCompatActivity implements View.OnClickListener
             nameView.setLayoutParams(layoutParams);
 
 
-            return convertView;
+            return view;
         }
     }
 }

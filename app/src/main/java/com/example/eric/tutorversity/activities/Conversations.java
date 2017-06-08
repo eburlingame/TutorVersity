@@ -2,7 +2,6 @@ package com.example.eric.tutorversity.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,7 +10,6 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.eric.tutorversity.R;
 import com.example.eric.tutorversity.models.Conversation;
@@ -23,11 +21,7 @@ import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 public class Conversations extends AppCompatActivity {
 
-    private ArrayAdapter<Conversation> adapter;
-    private ArrayList<Conversation> conversations;
-    private ListView listView;
     private Context context;
-    private Student student;
 
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -35,17 +29,17 @@ public class Conversations extends AppCompatActivity {
         setContentView(R.layout.activity_conversations);
 
         String json = getIntent().getExtras().getString(USER);
-        student = new Student(json);
-        listView = (ListView)findViewById(R.id.conversations);
+        Student student = new Student(json);
+        ListView listView = (ListView)findViewById(R.id.conversations);
         context = this;
-        conversations = new ArrayList<>();
+        ArrayList<Conversation> conversationList = new ArrayList<>();
         Conversation temp = new Conversation();
         temp.setConversationID("Adam");
-        conversations.add(temp);
+        conversationList.add(temp);
         temp = new Conversation();
         temp.setConversationID("Julie");
-        conversations.add(temp);
-        adapter = new ArrayAdapter<Conversation>(this, android.R.layout.simple_list_item_1, conversations);
+        conversationList.add(temp);
+        ArrayAdapter<Conversation> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, conversationList);
         listView.setAdapter(adapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

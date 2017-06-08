@@ -1,5 +1,6 @@
 package com.example.eric.tutorversity.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,8 +27,10 @@ public class AddQuestion extends AppCompatActivity {
 
     private class DataHandler implements Response.Listener<NewQuestionResponse>
     {
-        DataHandler(Question question)
+        private Context context;
+        DataHandler(Question question, Context context)
         {
+            this.context = context;
             NewQuestionRequest request = new NewQuestionRequest(student, question);
             OurSingleton.getInstance(
                     getApplicationContext()).addToRequestQueue(getApplicationContext(),
@@ -46,37 +49,37 @@ public class AddQuestion extends AppCompatActivity {
                 showDialog("Error creating the question" + response.getMessage());
             }
         }
-    }
 
-    private void showDialogExitAfterClose(String message)
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                        Intent intent = new Intent(getBaseContext(), StudentDashboard.class);
-                        intent.putExtra(USER, student.toJSON().toString());
-                        startActivity(intent);
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
+        private void showDialogExitAfterClose(String message)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage(message)
+                    .setCancelable(false)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                            Intent intent = new Intent(getBaseContext(), StudentDashboard.class);
+                            intent.putExtra(USER, student.toJSON().toString());
+                            startActivity(intent);
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
 
-    private void showDialog(String message)
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
+        private void showDialog(String message)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage(message)
+                    .setCancelable(false)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
     }
 
     @Override
@@ -97,7 +100,7 @@ public class AddQuestion extends AppCompatActivity {
             qLabel.getText().toString(),
             spinner.getSelectedItem().toString()
         );
-        new DataHandler(question);
+        new DataHandler(question, this);
     }
 
     //need to figure out how to go back to previous activity properly

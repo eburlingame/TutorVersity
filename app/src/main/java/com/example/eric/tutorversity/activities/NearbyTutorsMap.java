@@ -1,13 +1,7 @@
 package com.example.eric.tutorversity.activities;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.eric.tutorversity.R;
@@ -21,14 +15,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class NearbyTutorsMap extends AppCompatActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
-    private Activity activity;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby_tutors_map);
-        activity = this;
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -48,7 +38,7 @@ public class NearbyTutorsMap extends AppCompatActivity implements OnMapReadyCall
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        GoogleMap mMap = googleMap;
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
@@ -70,13 +60,5 @@ public class NearbyTutorsMap extends AppCompatActivity implements OnMapReadyCall
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(slo, 14));
     }
-
-
-//    @Override
-//    public boolean onMarkerClick(Marker marker) {
-//
-//        return true;
-//    }
-
 
 }
