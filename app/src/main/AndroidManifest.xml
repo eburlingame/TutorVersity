@@ -58,6 +58,9 @@
         <activity
             android:name=".activities.Conversations"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.ConversationTutors"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.Messaging" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
