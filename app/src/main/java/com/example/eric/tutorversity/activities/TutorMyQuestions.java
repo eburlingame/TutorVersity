@@ -27,7 +27,9 @@ import com.example.eric.tutorversity.models.Question;
 import com.example.eric.tutorversity.models.Student;
 import com.example.eric.tutorversity.models.User;
 import com.example.eric.tutorversity.models.api.request.GetQuestionsRequest;
+import com.example.eric.tutorversity.models.api.request.GetUserQuestionsRequest;
 import com.example.eric.tutorversity.models.api.response.GetQuestionsResponse;
+import com.example.eric.tutorversity.models.api.response.GetUserQuestionsResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +43,30 @@ import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 public class TutorMyQuestions extends AppCompatActivity {
 
     private Student student;
-    private List<Question> list = new ArrayList<>();
-    private Activity activity;
+    private List<Question> questions = new ArrayList<>();
+    private ArrayAdapter<Question> adapter;
+    private ListView newsItems;
+
+    private class DataHandler implements Response.Listener<GetQuestionsResponse>
+    {
+        DataHandler(User user)
+        {
+            GetQuestionsRequest request = new GetQuestionsRequest(user);
+            OurSingleton.getInstance(getApplicationContext()).addToRequestQueue(request.makeRequest(this));
+        }
+
+        @Override
+        public void onResponse(GetQuestionsResponse response)
+        {
+            questions = response.getQuestions();
+            adapter.addAll(questions);
+            if(questions == null || questions.size() == 0) {
+                Toast toast = Toast.makeText(TutorMyQuestions.this, "No Question\n To Display", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+        }
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,18 +75,6 @@ public class TutorMyQuestions extends AppCompatActivity {
         String json = getIntent().getExtras().getString(USER);
         student = new Student(json);
 
-        Question question = new Question("Joe Smith", "Stuck on factorials", "How do I compute 12! by hand?", "Math");
-        Question question1 = new Question("Kim Davis", "Try-Catch Blocks", "What is the proper usage of try-catch block for input?", "Computer Engineering");
-        Question question2 = new Question("Bob Miller", "Time complexity", "How do I compute the time complexity of a for loop?", "Computer Engineering");
-        Question question5 = new Question("Taylor Williams", "Atomic numbers", "On the periodic table, which number is the atomic number?", "Chemistry");
-        Question question3 = new Question("Taylor Williams", "Atomic numbers", "On the periodic table, which number is the atomic number?", "Chemistry");
-        Question question4 = new Question("Taylor Williams", "Atomic numbers", "On the periodic table, which number is the atomic number?ajsdkfjlkasdjfaklsdjflkasjdlfjalkdfjlkasljdflkasdjflaklsjdflk", "Biology");
-        list.add(question);
-        list.add(question1);
-        list.add(question2);
-        list.add(question3);
-        list.add(question4);
-        list.add(question5);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         StudentSidebarMenu menu = new StudentSidebarMenu(this, toolbar, student);
@@ -75,7 +87,7 @@ public class TutorMyQuestions extends AppCompatActivity {
         newsItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Question currentItem = list.get(position);
+                Question currentItem = questions.get(position);
                 Intent intent = new Intent(TutorMyQuestions.this, ViewQuestion.class);
                 intent.putExtra("QUESTION_ID", currentItem);
                 startActivity(intent);
@@ -90,7 +102,7 @@ public class TutorMyQuestions extends AppCompatActivity {
 
 
         public customAdapter() {
-            super(TutorMyQuestions.this, R.layout.activity_tutor_view_question, list);
+            super(TutorMyQuestions.this, R.layout.activity_tutor_view_question, questions);
         }
 
         @NonNull
@@ -100,7 +112,7 @@ public class TutorMyQuestions extends AppCompatActivity {
                 convertView = getLayoutInflater().inflate(R.layout.tutor_question_item, parent, false);
             }
 
-            Question currentItem = list.get(position);
+            Question currentItem = questions.get(position);
 
             ImageView newsImage = (ImageView) convertView.findViewById(R.id.leftIco);
             TextView question = (TextView) convertView.findViewById(R.id.desc);
