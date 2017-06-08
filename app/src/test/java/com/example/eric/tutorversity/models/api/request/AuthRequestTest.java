@@ -5,9 +5,14 @@ import com.example.eric.tutorversity.models.api.response.AuthResponse;
 
 import org.json.JSONObject;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.*;
 
+@RunWith(RobolectricTestRunner.class)
+@Config(manifest=Config.NONE)
 public class AuthRequestTest {
 
     @Test
@@ -23,5 +28,4 @@ public class AuthRequestTest {
 
         request.onResponse(new JSONObject("{ 'success': false, 'message': 'error' } "));
     }
-
 }
