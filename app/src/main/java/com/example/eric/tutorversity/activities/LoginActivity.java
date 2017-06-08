@@ -93,6 +93,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                findViewById(R.id.loginMessage).setVisibility(View.GONE);
                 attemptLogin();
             }
         });
@@ -288,10 +289,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
                 else if (response.getUser() instanceof Tutor)
                 {
-                    // TODO: Start TutorDashboard
-//                    Intent intent = new Intent(getBaseContext(), TutorDashboard.class);
-//                    intent.putExtra(USER, response.getUser().toJSON().toString());
-//                    startActivity(intent);
+                    Intent intent = new Intent(getBaseContext(), TutorDashboard.class);
+                    intent.putExtra(USER, response.getUser().toJSON().toString());
+                    startActivity(intent);
                 }
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

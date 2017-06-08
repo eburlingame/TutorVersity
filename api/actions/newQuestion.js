@@ -46,6 +46,7 @@ exports.newQuestion = function(payload, cb) {
         } else {
           console.log("data", data);
           cb({
+            "success": true,
             "message": "Question successfully added " + newQId
           });
         }

@@ -11,6 +11,8 @@ import com.example.eric.tutorversity.models.Question;
 import com.example.eric.tutorversity.models.Student;
 import com.example.eric.tutorversity.models.User;
 
+import java.util.Date;
+
 import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 public class ViewQuestion extends AppCompatActivity {
@@ -36,7 +38,7 @@ public class ViewQuestion extends AppCompatActivity {
         subjectLabel.setText(question.subject);
 
         EditText timeLabel = (EditText) findViewById(R.id.timeLabel);
-        timeLabel.setText(question.time);
+        timeLabel.setText(new Date().toString());
 
         EditText titleLabel = (EditText) findViewById(R.id.questionTitleLabel);
         titleLabel.setText(question.title);

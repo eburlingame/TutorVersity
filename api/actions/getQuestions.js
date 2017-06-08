@@ -11,11 +11,11 @@ function mapQuestionsList(data)
   return data["Items"].map(function(q){
     return {
       "subject": q.subject.S,
-      "question": q.subject.S,
-      "id": q.subject.S,
-      "email": q.subject.S,
-      "latitude": q.subject.N,
-      "longitude": q.subject.N,
+      "question": q.question.S,
+      "id": q.id.S,
+      "email": q.email.S,
+      "latitude": q.latitude.N,
+      "longitude": q.longitude.N,
     }
   })
 }

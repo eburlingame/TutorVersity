@@ -54,9 +54,9 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
                         nearbyTutorsItem,
                         messagesItem,
                         settingsItem,
-                        logoutItem,
                         viewQuestionItem,
-                        viewTutorItem
+                        viewTutorItem,
+                        logoutItem
                 )
                 .withOnDrawerItemClickListener(this)
                 .build();
@@ -103,16 +103,19 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
         }
         else if (drawerItem.equals(logoutItem))
         {
-
+            Intent intent = new Intent(activity.getBaseContext(), LoginActivity.class);
+            intent.putExtra(USER, student.toJSON().toString());
+            activity.startActivity(intent);
         }
         else if (drawerItem.equals(viewQuestionItem))
         {
             Intent intent = new Intent(activity.getBaseContext(), ViewQuestion.class);
             activity.startActivity(intent);
         }
-        else if (drawerItem.equals(viewQuestionItem))
+        else if (drawerItem.equals(viewTutorItem))
         {
-
+            Intent intent = new Intent(activity.getBaseContext(), ViewTutor.class);
+            activity.startActivity(intent);
         }
         return true;
     }
