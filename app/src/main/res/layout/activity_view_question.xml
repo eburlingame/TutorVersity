@@ -39,15 +39,12 @@
                 android:id="@+id/questionBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/button2"
-                android:layout_alignLeft="@+id/questionTitleLabel"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignStart="@+id/questionTitleLabel"
-                android:layout_below="@+id/questionTitleLabel"
                 android:ems="10"
                 android:inputType="textMultiLine"
-                android:text="Question Body" />
+                android:text="Question Body"
+                android:layout_below="@+id/questionTitleLabel"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
             <EditText
                 android:clickable="false"
