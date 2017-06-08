@@ -1,5 +1,7 @@
 package com.example.eric.tutorversity.activities;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,15 +15,78 @@ import android.view.View;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.Spinner;
 
+import com.android.volley.Response;
+import com.example.eric.tutorversity.OurSingleton;
 import com.example.eric.tutorversity.R;
+import com.example.eric.tutorversity.models.Question;
 import com.example.eric.tutorversity.models.Student;
+import com.example.eric.tutorversity.models.User;
+import com.example.eric.tutorversity.models.api.request.GetUserQuestionsRequest;
+import com.example.eric.tutorversity.models.api.request.NewQuestionRequest;
+import com.example.eric.tutorversity.models.api.response.GetUserQuestionsResponse;
+import com.example.eric.tutorversity.models.api.response.NewQuestionResponse;
 
 import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 public class AddQuestion extends AppCompatActivity {
 
     private Student student;
+
+    private class DataHandler implements Response.Listener<NewQuestionResponse>
+    {
+        DataHandler(Question question)
+        {
+            NewQuestionRequest request = new NewQuestionRequest(student, question);
+            OurSingleton.getInstance(getApplicationContext()).addToRequestQueue(request.makeRequest(this));
+        }
+
+        @Override
+        public void onResponse(NewQuestionResponse response)
+        {
+            if (response.isSuccess())
+            {
+                showDialogExitAfterClose("Question successfully added!");
+            }
+            else
+            {
+                showDialog("Error creating the question" + response.getMessage());
+            }
+        }
+    }
+
+    private void showDialogExitAfterClose(String message)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        Intent intent = new Intent(getBaseContext(), StudentDashboard.class);
+                        intent.putExtra(USER, student.toJSON().toString());
+                        startActivity(intent);
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void showDialog(String message)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +95,18 @@ public class AddQuestion extends AppCompatActivity {
 
         String json = getIntent().getExtras().getString(USER);
         student = new Student(json);
+    }
+
+    public void sendQuestion(View view) {
+        EditText qLabel = (EditText) findViewById(R.id.questionText);
+        Spinner spinner = (Spinner) findViewById(R.id.subjectSpinner);
+        Question question = new Question(
+            student.getEmail(),
+            student.getName(),
+            qLabel.getText().toString(),
+            spinner.getSelectedItem().toString()
+        );
+        new DataHandler(question);
     }
 
     //need to figure out how to go back to previous activity properly

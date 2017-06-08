@@ -16,7 +16,6 @@ function mapToUser(userData)
     "type": user.type.N,
     "bio": user.bio.S,
     "subjects": user.subjects.S,
-    "token": user.token.S
   }
 }
 
@@ -89,7 +88,6 @@ exports.auth = function(payload, cb) {
                   });
                 }
               });
-
             };
         });
     }
