@@ -16,7 +16,6 @@ import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
 {
-    private Drawer drawer;
     private Student student;
     private Activity activity;
 
@@ -44,7 +43,7 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
         this.student = student;
         this.activity = activity;
         //create the drawer and remember the `Drawer` drawer object
-        drawer = new DrawerBuilder()
+        new DrawerBuilder()
                 .withActivity(activity)
                 .withToolbar(toolbar)
                 .addDrawerItems(

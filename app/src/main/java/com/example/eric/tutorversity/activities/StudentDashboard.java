@@ -28,25 +28,25 @@ public class StudentDashboard extends AppCompatActivity {
         student = new Student(json);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        StudentSidebarMenu menu = new StudentSidebarMenu(this, toolbar, student);
+        new StudentSidebarMenu(this, toolbar, student);
 
         Button questions = (Button) findViewById(R.id.btnViewQuestions);
         questions.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(StudentDashboard.this, MyQuestions.class);
                 intent.putExtra(USER, student.toJSON().toString());
-                if(intent != null)
-                    startActivity(intent);
+                startActivity(intent);
             }
         });
 
         Button ask = (Button) findViewById(R.id.btnAskQuestion);
-        ask.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        ask.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
                 Intent intent = new Intent(StudentDashboard.this, AddQuestion.class);
                 intent.putExtra(USER, student.toJSON().toString());
-                if(intent != null)
-                    startActivity(intent);
+                startActivity(intent);
             }
         });
     }

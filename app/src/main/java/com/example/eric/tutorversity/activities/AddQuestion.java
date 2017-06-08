@@ -29,7 +29,9 @@ public class AddQuestion extends AppCompatActivity {
         DataHandler(Question question)
         {
             NewQuestionRequest request = new NewQuestionRequest(student, question);
-            OurSingleton.getInstance(getApplicationContext()).addToRequestQueue(request.makeRequest(this));
+            OurSingleton.getInstance(
+                    getApplicationContext()).addToRequestQueue(getApplicationContext(),
+                    request.makeRequest(this));
         }
 
         @Override

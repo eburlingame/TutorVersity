@@ -22,7 +22,6 @@ import com.android.volley.Response;
 import com.example.eric.tutorversity.OurSingleton;
 import com.example.eric.tutorversity.R;
 import com.example.eric.tutorversity.models.Question;
-import com.example.eric.tutorversity.models.Student;
 import com.example.eric.tutorversity.models.Tutor;
 import com.example.eric.tutorversity.models.User;
 import com.example.eric.tutorversity.models.api.request.GetQuestionsRequest;
@@ -48,7 +47,9 @@ public class TutorMyQuestions extends AppCompatActivity {
         DataHandler(User user)
         {
             GetQuestionsRequest request = new GetQuestionsRequest(user);
-            OurSingleton.getInstance(getApplicationContext()).addToRequestQueue(request.makeRequest(this));
+            OurSingleton.getInstance(
+                    getApplicationContext()).addToRequestQueue(getApplicationContext(),
+                    request.makeRequest(this));
         }
 
         @Override
@@ -70,14 +71,13 @@ public class TutorMyQuestions extends AppCompatActivity {
 
         String json = getIntent().getExtras().getString(USER);
         tutor = new Tutor(json);
-        Student student = new Student(json);
 
-        DataHandler handler = new DataHandler(tutor);
+        new DataHandler(tutor);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        TutorSidebarMenu menu = new TutorSidebarMenu(this, toolbar, tutor);
+        new TutorSidebarMenu(this, toolbar, tutor);
 
-        adapter = new customAdapter();
+        adapter = new CustomAdapter();
 
         ListView newsItems = (ListView) (findViewById(R.id.newsItems));
         newsItems.setAdapter(adapter);
@@ -94,27 +94,26 @@ public class TutorMyQuestions extends AppCompatActivity {
     }
 
 
-    private class customAdapter extends ArrayAdapter<Question> {
+    private class CustomAdapter extends ArrayAdapter<Question> {
 
 
-        public customAdapter() {
+        public CustomAdapter() {
             super(TutorMyQuestions.this, R.layout.activity_tutor_view_question, questions);
         }
 
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.tutor_question_item, parent, false);
-            }
+
+            View view = getLayoutInflater().inflate(R.layout.tutor_question_item, parent, false);
 
             Question currentItem = questions.get(position);
 
-            ImageView newsImage = (ImageView) convertView.findViewById(R.id.leftIco);
-            TextView question = (TextView) convertView.findViewById(R.id.desc);
-            TextView heading = (TextView) convertView.findViewById(R.id.heading);
+            ImageView newsImage = (ImageView) view.findViewById(R.id.leftIco);
+            TextView question = (TextView) view.findViewById(R.id.desc);
+            TextView heading = (TextView) view.findViewById(R.id.heading);
 
-            ImageView delete = (ImageView) convertView.findViewById(R.id.delete);
+            ImageView delete = (ImageView) view.findViewById(R.id.delete);
             delete.setFocusable(false);
             delete.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -122,7 +121,7 @@ public class TutorMyQuestions extends AppCompatActivity {
                 }
             });
 
-            ImageView reply = (ImageView) convertView.findViewById(R.id.reply);
+            ImageView reply = (ImageView) view.findViewById(R.id.reply);
             reply.setFocusable(false);
             reply.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -138,7 +137,7 @@ public class TutorMyQuestions extends AppCompatActivity {
             newsImage.setImageResource(getImage(currentItem.getSubject()));
 
 
-            return convertView;
+            return view;
         }
 
         private int getImage(String subject) {

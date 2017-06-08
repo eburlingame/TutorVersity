@@ -24,15 +24,14 @@ public class TutorDashboard extends AppCompatActivity {
         tutor = new Tutor(json);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        TutorSidebarMenu menu = new TutorSidebarMenu(this, toolbar, tutor);
+        new TutorSidebarMenu(this, toolbar, tutor);
 
         Button questions = (Button) findViewById(R.id.btnViewQuestions);
         questions.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(TutorDashboard.this, TutorMyQuestions.class);
                 intent.putExtra(USER, tutor.toJSON().toString());
-                if(intent != null)
-                    startActivity(intent);
+                startActivity(intent);
             }
         });
 
@@ -41,8 +40,7 @@ public class TutorDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(TutorDashboard.this, AddQuestion.class);
                 intent.putExtra(USER, tutor.toJSON().toString());
-                if(intent != null)
-                    startActivity(intent);
+                startActivity(intent);
             }
         });
         new TutorSidebarMenu(this, toolbar, tutor);

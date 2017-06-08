@@ -16,7 +16,6 @@ import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 public class TutorSidebarMenu implements Drawer.OnDrawerItemClickListener
 {
-    private Drawer drawer;
     private Tutor tutor;
     private Activity activity;
 
@@ -38,7 +37,7 @@ public class TutorSidebarMenu implements Drawer.OnDrawerItemClickListener
         this.tutor = tutor;
         this.activity = activity;
         //create the drawer and remember the `Drawer` drawer object
-        drawer = new DrawerBuilder()
+        new DrawerBuilder()
                 .withActivity(activity)
                 .withToolbar(toolbar)
                 .addDrawerItems(
@@ -63,9 +62,11 @@ public class TutorSidebarMenu implements Drawer.OnDrawerItemClickListener
             activity.startActivity(intent);
 
         }
-        else if (drawerItem.equals(myProfileItem))
+        else if (drawerItem.equals(myProfileItem) || drawerItem.equals(settingsItem))
         {
-
+            Intent intent = new Intent(activity.getBaseContext(), Settings.class);
+            intent.putExtra(USER, tutor.toJSON().toString());
+            activity.startActivity(intent);
         }
         else if (drawerItem.equals(nearbyQuestions))
         {
@@ -75,11 +76,9 @@ public class TutorSidebarMenu implements Drawer.OnDrawerItemClickListener
         }
         else if (drawerItem.equals(messagesItem))
         {
-
-        }
-        else if (drawerItem.equals(settingsItem))
-        {
-
+            Intent intent = new Intent(activity.getBaseContext(), Conversations.class);
+            intent.putExtra(USER, tutor.toJSON().toString());
+            activity.startActivity(intent);
         }
         else if (drawerItem.equals(logoutItem))
         {

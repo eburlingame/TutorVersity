@@ -7,11 +7,8 @@ import android.widget.EditText;
 
 import com.example.eric.tutorversity.R;
 import com.example.eric.tutorversity.models.Question;
-import com.example.eric.tutorversity.models.User;
 
 import java.util.Date;
-
-import static com.example.eric.tutorversity.models.api.JSONConstants.USER;
 
 public class ViewQuestion extends AppCompatActivity {
 

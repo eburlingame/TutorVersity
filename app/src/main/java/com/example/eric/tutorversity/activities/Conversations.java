@@ -49,7 +49,7 @@ public class Conversations extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        StudentSidebarMenu menu = new StudentSidebarMenu(this, toolbar, student);
+        new StudentSidebarMenu(this, toolbar, student);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()

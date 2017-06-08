@@ -39,7 +39,9 @@ public class MyQuestions extends AppCompatActivity {
         DataHandler(User user)
         {
             GetUserQuestionsRequest request = new GetUserQuestionsRequest(user);
-            OurSingleton.getInstance(getApplicationContext()).addToRequestQueue(request.makeRequest(this));
+            OurSingleton.getInstance(
+                    getApplicationContext()).addToRequestQueue(getApplicationContext(),
+                    request.makeRequest(this));
         }
 
         @Override
@@ -62,12 +64,12 @@ public class MyQuestions extends AppCompatActivity {
 
         String json = getIntent().getExtras().getString(USER);
         Student student = new Student(json);
-        DataHandler handler = new DataHandler(student);
+        new DataHandler(student);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        StudentSidebarMenu menu = new StudentSidebarMenu(this, toolbar, student);
+        new StudentSidebarMenu(this, toolbar, student);
 
-        adapter = new customAdapter();
+        adapter = new CustomAdapter();
 
         ListView newsItems = (ListView) (findViewById(R.id.newsItems));
 
@@ -85,8 +87,8 @@ public class MyQuestions extends AppCompatActivity {
     }
 
 
-    private class customAdapter extends ArrayAdapter<Question> {
-        public customAdapter() {
+    private class CustomAdapter extends ArrayAdapter<Question> {
+        public CustomAdapter() {
             super(MyQuestions.this, R.layout.activity_my_questions_list, questions);
         }
 
@@ -94,22 +96,19 @@ public class MyQuestions extends AppCompatActivity {
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.question_item, parent, false);
-            }
+            View view = getLayoutInflater().inflate(R.layout.question_item, parent, false);
 
             Question currentItem = questions.get(position);
 
-            ImageView newsImage = (ImageView) convertView.findViewById(R.id.leftIco);
-            TextView question = (TextView) convertView.findViewById(R.id.desc);
-            TextView heading = (TextView) convertView.findViewById(R.id.heading);
+            ImageView newsImage = (ImageView) view.findViewById(R.id.leftIco);
+            TextView question = (TextView) view.findViewById(R.id.desc);
+            TextView heading = (TextView) view.findViewById(R.id.heading);
 
             heading.setText(currentItem.getTitle());
             question.setText(currentItem.getQuestion());
             newsImage.setImageResource(getImage(currentItem.getSubject()));
 
-
-            return convertView;
+            return view;
         }
 
         private int getImage(String subject) {

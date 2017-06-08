@@ -29,10 +29,7 @@ import java.util.Arrays;
 public class TutorMessaging extends AppCompatActivity implements View.OnClickListener {
 
     private MessagesAdapter adapter;
-    private String recipient;
-    private ListView listView;
     private ArrayList<Message> messages;
-    private String convoID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +39,8 @@ public class TutorMessaging extends AppCompatActivity implements View.OnClickLis
         Intent intent = getIntent();
         String title = intent.getStringExtra("contact name");
         setTitle(title);
-        recipient = "Bill";
 
-        listView = (ListView) findViewById(R.id.messages_list);
+        ListView listView = (ListView) findViewById(R.id.messages_list);
         messages = new ArrayList<>();
         adapter = new MessagesAdapter(messages);
         listView.setAdapter(adapter);
@@ -59,7 +55,6 @@ public class TutorMessaging extends AppCompatActivity implements View.OnClickLis
 
         String[] ids = {"Adam", "-", "Kartik"};
         Arrays.sort(ids);
-        convoID = ids[0] + ids[1] + ids[2];
     }
 
     @Override
@@ -90,10 +85,10 @@ public class TutorMessaging extends AppCompatActivity implements View.OnClickLis
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = super.getView(position, convertView, parent);
+            View view = super.getView(position, convertView, parent);
             Message message = getItem(position);
 
-            TextView nameView = (TextView) convertView.findViewById(R.id.message);
+            TextView nameView = (TextView) view.findViewById(R.id.message);
             nameView.setText(message.getText());
 
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) nameView.getLayoutParams();
@@ -118,8 +113,7 @@ public class TutorMessaging extends AppCompatActivity implements View.OnClickLis
 
             nameView.setLayoutParams(layoutParams);
 
-
-            return convertView;
+            return view;
         }
     }
 }

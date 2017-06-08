@@ -16,7 +16,7 @@ public class QuestionTest {
     public void testTruncate() {
         String expected = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx";
         Question q = new Question("hello", "title", "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz", "");
-        String actual = q.truncateQuestion(q.question);
+        String actual = q.truncateQuestion(q.getQuestion());
         assertEquals(expected, actual);
     }
 

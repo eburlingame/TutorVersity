@@ -14,7 +14,14 @@ public class User {
     private String bio;
     private String name;
     private String token;
-    private boolean showMyLocation;
+
+    public User()
+    {
+        email = "";
+        bio = "";
+        name = "";
+        token = "";
+    }
 
     public User(JSONObject jsonObject) {
         try
@@ -50,9 +57,7 @@ public class User {
                     .put(EMAIL, email)
                     .put(BIO, bio)
                     .put(NAME, name)
-                    .put(TOKEN, token)
-//                    .put(LOCATION, currentLocation’.toJSON())
-                    .put(SHOW_MY_LOCATION, showMyLocation);
+                    .put(TOKEN, token);
         } catch (JSONException e) {
             Log.e("E", e.getMessage(), e);
             return null;

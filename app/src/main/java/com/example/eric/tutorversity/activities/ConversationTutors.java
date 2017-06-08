@@ -51,7 +51,7 @@ public class ConversationTutors extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        TutorSidebarMenu menu = new TutorSidebarMenu(this, toolbar, tutor);
+        new TutorSidebarMenu(this, toolbar, tutor);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()

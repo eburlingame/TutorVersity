@@ -26,7 +26,7 @@ public class Settings extends AppCompatActivity {
         student = new Student(json);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        StudentSidebarMenu menu = new StudentSidebarMenu(this, toolbar, student);
+        new StudentSidebarMenu(this, toolbar, student);
 
         seekBar();
     }

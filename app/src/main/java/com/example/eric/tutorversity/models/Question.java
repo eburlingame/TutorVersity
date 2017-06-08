@@ -15,7 +15,7 @@ public class Question implements Serializable {
     }
 
     public String getQuestion() {
-        return question_text;
+        return questionText;
     }
 
     public String getSubject() {
@@ -24,13 +24,13 @@ public class Question implements Serializable {
 
     private String asker;
     private String title;
-    private String question_text;
+    private String questionText;
     private String subject;
 
     public Question(String asker, String title, String question, String subject) {
         this.asker = asker;
         this.title = title;
-        this.question_text = question;
+        this.questionText = question;
         this.subject = subject;
     }
 
@@ -49,7 +49,7 @@ public class Question implements Serializable {
 
     /* Setters */
     public void setAsker(String asker) {this.asker = asker;}
-    public void setQuestion(String question) {this.question_text = question;}
+    public void setQuestion(String question) {this.questionText = question;}
     public void setSubject(String subject) {this.subject = subject;}
     public void setTitle(String title) {this.title = title;}
 }
