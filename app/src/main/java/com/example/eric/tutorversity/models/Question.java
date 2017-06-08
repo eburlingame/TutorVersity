@@ -1,6 +1,8 @@
 package com.example.eric.tutorversity.models;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Question implements Serializable {
 
@@ -14,5 +16,18 @@ public class Question implements Serializable {
         this.title = title;
         this.question = question;
         this.subject = subject;
+    }
+
+
+    public String truncateQuestion(String question) {
+       if(question.length() > 50) {
+           return question.substring(0, 50);
+       }
+       return question;
+    }
+
+    public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
     }
 }

@@ -83,7 +83,9 @@ public class TutorSidebarMenu implements Drawer.OnDrawerItemClickListener
         }
         else if (drawerItem.equals(logoutItem))
         {
-
+            Intent intent = new Intent(activity.getBaseContext(), LoginActivity.class);
+            intent.putExtra(USER, tutor.toJSON().toString());
+            activity.startActivity(intent);
         }
         return true;
     }

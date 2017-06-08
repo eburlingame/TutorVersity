@@ -42,10 +42,10 @@ public class ConversationTutors extends AppCompatActivity {
         context = this;
         conversations = new ArrayList<>();
         Conversation temp = new Conversation();
-        temp.setConversationID("Eric");
+        temp.setConversationID("Joe");
         conversations.add(temp);
         temp = new Conversation();
-        temp.setConversationID("Garret");
+        temp.setConversationID("Bob");
         conversations.add(temp);
         adapter = new ArrayAdapter<Conversation>(this, android.R.layout.simple_list_item_1, conversations);
         listView.setAdapter(adapter);
@@ -60,7 +60,7 @@ public class ConversationTutors extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
             {
                 String name = parent.getItemAtPosition(pos).toString();
-                Intent intent = new Intent(context, Messaging.class);
+                Intent intent = new Intent(context, TutorMessaging.class);
                 intent.putExtra("contact name",name);
                 startActivity(intent);
             }
