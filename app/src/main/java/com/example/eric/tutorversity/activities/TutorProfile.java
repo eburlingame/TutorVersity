@@ -6,12 +6,10 @@ import com.example.eric.tutorversity.R;
  * Created by Manasi on 6/7/17.
  */
 
-public class TutorProfile {
+public class TutorProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tutor_profile);
-
-
     }
 }

@@ -14,7 +14,5 @@ public class StudentProfile extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_profile);
-
-
     }
 }
