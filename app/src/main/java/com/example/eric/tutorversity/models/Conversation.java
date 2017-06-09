@@ -19,6 +19,10 @@ public class Conversation {
         return conversationID;
     }
 
+    public Conversation() {
+        this.conversationID = "";
+    }
+
     public void setConversationID(String conversationID) {
         this.conversationID = conversationID;
     }
