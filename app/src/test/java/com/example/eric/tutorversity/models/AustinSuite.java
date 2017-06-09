@@ -12,7 +12,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 
 
-@SuiteClasses({ UserTest.class})
+@SuiteClasses({ UserTest.class })
 public class AustinSuite {
 
 }
