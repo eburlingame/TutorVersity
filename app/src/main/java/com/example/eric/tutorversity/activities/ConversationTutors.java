@@ -34,10 +34,7 @@ public class ConversationTutors extends AppCompatActivity {
         context = this;
         ArrayList<Conversation> conversations = new ArrayList<>();
         Conversation temp = new Conversation();
-        temp.setConversationID("Joe");
-        conversations.add(temp);
-        temp = new Conversation();
-        temp.setConversationID("Bob");
+        temp.setConversationID("Joe Smith");
         conversations.add(temp);
         ArrayAdapter<Conversation> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, conversations);
         listView.setAdapter(adapter);

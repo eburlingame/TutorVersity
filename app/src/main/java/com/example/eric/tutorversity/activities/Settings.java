@@ -33,12 +33,13 @@ public class Settings extends AppCompatActivity {
     public void seekBar() {
         final TextView t1= (TextView) findViewById(R.id.textView12);
         SeekBar sk=(SeekBar) findViewById(R.id.seekBar);
+        seekStatus/=5;
         sk.setProgress(seekStatus);
         t1.setText(Integer.toString(seekStatus));
         sk.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                seekStatus = seekBar.getProgress();
+                seekStatus = (seekBar.getProgress());
             }
 
             @Override
@@ -48,7 +49,7 @@ public class Settings extends AppCompatActivity {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                t1.setText(Integer.toString(progress));
+                t1.setText(Integer.toString(progress/5));
             }
         });
     }
