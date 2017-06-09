@@ -3,6 +3,7 @@ package com.example.eric.tutorversity.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.example.eric.tutorversity.R;
@@ -32,5 +33,10 @@ public class ViewQuestion extends AppCompatActivity {
 
         EditText questionLabel = (EditText) findViewById(R.id.questionBody);
         questionLabel.setText(question.getQuestion());
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return true;
     }
 }

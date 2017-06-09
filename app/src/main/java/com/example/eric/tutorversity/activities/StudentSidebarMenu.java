@@ -33,10 +33,10 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
             .withIcon(R.drawable.ic_more_vert_black_24dp);
     private PrimaryDrawerItem logoutItem = new PrimaryDrawerItem().withIdentifier(7).withName("Logout")
             .withIcon(R.drawable.ic_clear_black_24dp);
-    private PrimaryDrawerItem viewQuestionItem = new PrimaryDrawerItem().withIdentifier(8).withName("View Question")
+    /*private PrimaryDrawerItem viewQuestionItem = new PrimaryDrawerItem().withIdentifier(8).withName("View Question")
             .withIcon(R.drawable.ic_menu_send);
     private PrimaryDrawerItem viewTutorItem = new PrimaryDrawerItem().withIdentifier(9).withName("View Tutor")
-            .withIcon(R.drawable.ic_person_black_24dp);
+            .withIcon(R.drawable.ic_person_black_24dp);*/
 
     public StudentSidebarMenu(final Activity activity, Toolbar toolbar, Student student)
     {
@@ -53,8 +53,6 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
                         nearbyTutorsItem,
                         messagesItem,
                         settingsItem,
-                        viewQuestionItem,
-                        viewTutorItem,
                         logoutItem
                 )
                 .withOnDrawerItemClickListener(this)
@@ -104,16 +102,6 @@ public class StudentSidebarMenu implements Drawer.OnDrawerItemClickListener
         {
             Intent intent = new Intent(activity.getBaseContext(), LoginActivity.class);
             intent.putExtra(USER, student.toJSON().toString());
-            activity.startActivity(intent);
-        }
-        else if (drawerItem.equals(viewQuestionItem))
-        {
-            Intent intent = new Intent(activity.getBaseContext(), ViewQuestion.class);
-            activity.startActivity(intent);
-        }
-        else if (drawerItem.equals(viewTutorItem))
-        {
-            Intent intent = new Intent(activity.getBaseContext(), ViewTutor.class);
             activity.startActivity(intent);
         }
         return true;
