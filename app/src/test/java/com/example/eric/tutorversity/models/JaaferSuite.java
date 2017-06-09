@@ -13,10 +13,4 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ QuestionTest.class})
 public class JaaferSuite {
 
-    /**
-     * Created by jsheriff on 6/8/2017.
-     */
-
-    public static class JaaferSuite {
-    }
 }
